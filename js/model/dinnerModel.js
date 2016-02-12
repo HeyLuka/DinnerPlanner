@@ -3,15 +3,26 @@ var DinnerModel = function() {
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
+	// var numberOfGuests;
+	var menus = new Array;
+	menus.push ("new dish");
+
+	// using HashTable to contain those ingredients, with name being the key and detailed
+	// ingredients information stored in independent HashTables.
+	// var total_ingredients = {};
+
 
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
+		numberOfGuests = num;
 	}
 
 	// should return 
 	this.getNumberOfGuests = function() {
 		//TODO Lab 2
+		// return $(numberOfGuests);
+		return 4;
 	}
 
 	//Returns the dish that is on the menu for selected type 
@@ -22,6 +33,7 @@ var DinnerModel = function() {
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
 		//TODO Lab 2
+		return menus;
 	}
 
 	//Returns all ingredients for all the dishes on the menu.
@@ -32,17 +44,34 @@ var DinnerModel = function() {
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
+		var TotalMenuPrice = 0;
+		for(key in menus){
+			for(key_ingredient in menus[key]){
+				TotalMenuPrice += key_ingredient.price;
+			}
+		}
 	}
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
+		menus.push(getDish(id));
 	}
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
 		//TODO Lab 2
+		var found = false;
+		var index;
+		for(key in menus){
+			if(menus[key].id==id) {
+				index = key;
+				// got the item, and then return the index for deleting
+			}
+		}
+		menus.splice(index, 1);
+		window.alert("item deleted successfully!")
 	}
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
@@ -51,11 +80,13 @@ var DinnerModel = function() {
 	this.getAllDishes = function (type,filter) {
 	  return $(dishes).filter(function(index,dish) {
 		var found = true;
+		// if any valid filter parameter is passed, the following operation would be processed. 
 		if(filter){
 			found = false;
 			$.each(dish.ingredients,function(index,ingredient) {
 				if(ingredient.name.indexOf(filter)!=-1) {
 					found = true;
+					// it means there is at least one dish containing this ingredients.
 				}
 			});
 			if(dish.name.indexOf(filter) != -1)
@@ -327,5 +358,4 @@ var DinnerModel = function() {
 			}]
 		}
 	];
-
 }

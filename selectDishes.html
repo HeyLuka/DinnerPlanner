@@ -25,33 +25,21 @@
 		</div>
 	</div>
 	-->
-	<div id="navigationBar" class="container">
+	<div class="container">
 		<h1 id="main-header"></h1>
-		<h4 id="sub-header"></h4>
+		<p id="sub-header"></p>
 	</div>
 
-	<div id="displayField" class="container">
-		<div id="main-content"></div>
-
-		<!-- this is codes for constructing the wizards
-		<div id="start-wizard">
-			<h3 id="wizard-header"></h3>
-			<p id="wizard-description"></p>
-			<button id="initialize-button"></button>
+	<div class="container">
+		<div id="content" class="row">
+			<div id="my-dinner" class="col-xs-3"></div>
+			<div id="available-dishes" class="col-xs-9">
+				<div id="filter"></div>
+				<div id="dishes-options"></div>
+			</div>
 		</div>
-		-->
-
-		<!-- this is codes for constructing my-dinners menu. -->
-
-		<!-- this is codes for constructing filter for dishes. -->
-		<!-- this is codes for constructing list for available dishes options. -->
-		<!-- this is codes for constructing detailed dish information. -->
-		<!-- this is codes for constructing ingredients information for a certain dish. -->
-		<!-- this is codes for constructing the confirmation information for the dinner plan. -->
-
-
-
 	</div>
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -61,8 +49,6 @@
 	<!-- The application JavaScript code -->
 	<script src="js/app.js"></script>
 	<script src="js/model/dinnerModel.js"></script>
-	<script src="js/view/navigationBar.js"></script>
-	<script src="js/view/startWizard.js"></script>
 	<script src="js/view/exampleView.js"></script>
 	<script src="js/view/exampleViewController.js"></script>
   </body>
