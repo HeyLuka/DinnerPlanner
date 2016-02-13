@@ -23,7 +23,8 @@ $(document).ready(function() {
 	exampleView = new ExampleView($("#exampleView"));
 
 	navigationBar = new NavigationBar($("#navigationBar"));
-	startWizard = new StartWizard($("#displayField"));
+	// startWizard = new StartWizard($("#displayField"));
+	myDinnerBar = new MyDinnerBar($("#displayField"));
 })
 
 

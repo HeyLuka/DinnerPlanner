@@ -31,7 +31,47 @@
 	</div>
 
 	<div id="displayField" class="container">
-		<div id="main-content"></div>
+		<div id="main-content" class="row">
+
+			<div id="myDinner-bar" class="col-xs-3">
+				<h4 id="dinnerBar-title">My Dinner</h4>
+				<div id="numberOfGuests-panel">
+					<p>Number of guests: <span id="numberOfGuests">0</span></p>
+					<div id="numberOfGuests-function">
+						<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+						<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+				</div>
+				<div id="dinnerDishes-panel">
+					<table id="dinnerDishes-list" class="table table-striped">
+						<thead>
+							<tr>
+								<th>Dish Name</th>
+								<th>Cost</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="default-menu-row">
+								<td>Pending</td>
+								<td>0.00</td>
+							</tr>
+							<tr id="myMenu-display"></tr>
+						</tbody>
+					</table>
+					<div id="myDinner-price" style="text-align: right">SEK<span id="detailed-price">0.00</span></div>
+					<div>
+						<button id="confirm-myDinner" class="btn btn-primary">Confirm Dinner</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="selectDish-panel">
+				<div id="selectDish-filter"></div>
+					<h4>SELECT DISH</h4>
+				<div id="dishesList"></div>
+			</div>
+
+		</div>
 
 		<!-- this is codes for constructing the wizards
 		<div id="start-wizard">

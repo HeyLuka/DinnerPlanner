@@ -26,6 +26,10 @@ var StartWizard = function (container) {
 	// Get all relavant elements of the view
 	this.main_content = container.find("#main-content");
 	this.main_content.addClass("row");
+	this.myDinner_bar = container.find("#myDinner-bar");
+	// Hide MyDinnerBar in the index home page
+	this.myDinner_bar.hide();
+
 	// Define the related layout of the start-wizard
 	var wizard = document.createElement('div');
 	$(wizard).attr("id", "start-wizard");
@@ -34,6 +38,8 @@ var StartWizard = function (container) {
 	$(wizard_header).attr("id", "wizard-header");
 	var wizard_description = document.createElement('p');
 	$(wizard_description).attr("id", "wizard-description");
+	var wizard_helper = document.createElement('p');
+	$(wizard_helper).attr("id", "wizard-helper");
 	var wizard_button = document.createElement('button');
 	$(wizard_button).attr({"id": "start-button", "type": "button"});
 	$(wizard_button).addClass("btn btn-primary");
@@ -41,11 +47,13 @@ var StartWizard = function (container) {
 	this.main_content.append(wizard);
 	$(wizard).append(wizard_header);
 	$(wizard).append(wizard_description);
+	$(wizard).append(wizard_helper);
 	$(wizard).append(wizard_button);
 	// Finish the definition about the layout, then continue do with the content filling
 
 	$(wizard_header).html("A Home Dinner Service");
 	$(wizard_description).html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
+	$(wizard_helper).text("quickly start");
 	$(wizard_button).text("Create new dinner");
 
 
