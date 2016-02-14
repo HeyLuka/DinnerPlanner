@@ -6,5 +6,7 @@ var DetailedDish = function(container) {
 
 	this.selectDish_panel.hide();
 
+	
+
 
 }

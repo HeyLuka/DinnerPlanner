@@ -101,7 +101,7 @@
 				</div>
 
 				<div id="dish-ingredient" class="col-xs-7">
-					<table class="table table-striped">
+					<table class="table table-hover table-striped">
 						<caption>INGREDIENTS FOR 4 PEOPLE</caption>
 						<thead>
 							<tr>
@@ -127,10 +127,118 @@
 								<td>10.00</td>
 							</tr>
 						</tbody>
+						<tfoot>
+							<tr>
+								<td><b>Total</b></td>
+								<td></td>
+								<td>SEK</td>
+								<td>10.00</td>
+							</tr>
+							<tr>
+								<td colspan="2"></td>
+								<td colspan="2">
+									<button class="btn btn-primary">Confirm Dish</button>
+								</td>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 
-				<div id="dish-preparation"></div>
+				<div id="dish-preparation" class="col-xs-12">
+					<h3>PREPARATION</h3>
+					<div id="preparation-list">
+						<ol class="list-group">
+							<li class="list-group-item" style="display: list-item">Open the refrigerator</li>
+							<li class="list-group-item">Put the elephant into the fridge</li>
+							<li class="list-group-item">Close the door of the refridgerator</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+
+			<div id="confirmDinner-page">
+				<div class="col-xs-12">
+					<h4 class="col-xs-10">My Dinner:</h4>
+					<button class="btn btn-primary">Go back and edit dinner</button>
+				</div>
+
+				<div id="myMenu-detail" class="col-xs-12">
+					<div id="myMenu-display" class="col-xs-9">
+						<div id="dishInMenu-example" class="col-xs-3">
+							<img src="images/bakedbrie.jpg" class="img-thumbnail">
+							<h5>Bakedbrie</h5>
+							<p>77.20 SEK</p>
+						</div>
+						<div id="dishInMenu-example" class="col-xs-3">
+							<img src="images/bakedbrie.jpg" class="img-thumbnail">
+							<h5>Bakedbrie</h5>
+							<p>77.20 SEK</p>
+						</div>
+						<div id="dishInMenu-example" class="col-xs-3">
+							<img src="images/bakedbrie.jpg" class="img-thumbnail">
+							<h5>Bakedbrie</h5>
+							<p>77.20 SEK</p>
+						</div>
+						<div id="dishInMenu-example" class="col-xs-3">
+							<img src="images/bakedbrie.jpg" class="img-thumbnail">
+							<h5>Bakedbrie</h5>
+							<p>77.20 SEK</p>
+						</div>
+						<div id="dishInMenu-example" class="col-xs-3">
+							<img src="images/bakedbrie.jpg" class="img-thumbnail">
+							<h5>Bakedbrie</h5>
+							<p>77.20 SEK</p>
+						</div>
+					</div>
+
+					<div id="myMenu-totalCost" class="col-xs-3">
+						<p class="bg-info">Total:</p>
+						<p id="myMenu-total-cost">341.20 SEK</p>
+					</div>
+				</div>
+
+				<div id="printMenu-button">
+					<div class="col-xs-5"></div>
+					<button class="btn btn-primary col-xs-2">Print Full Recipe</button>
+					<div class="col-xs-5"></div>
+				</div>
+			</div>
+
+			<div id="printoutMenu-page">
+				<div class="col-xs-12">
+					<h4 class="col-xs-10">My Dinner:</h4>
+					<button class="btn btn-primary">Go back and edit dinner</button>
+				</div>
+
+				<div id="printoutMenu-info" class="col-xs-12">
+					<div id="printoutMenu-example" class="col-xs-12">
+						<div id="printoutDish-img" class="col-xs-2">
+							<img class="img-thumbnail" src="images/bakedbrie.jpg">
+						</div>
+						<div id="printoutDish-description" class="col-xs-5">
+							<h4>LASAGNE</h4>
+							<p class="bg-info">Lorem ipsum dolor sit amet</p>
+						</div>
+						<div id="printoutDish-preparation" class="col-xs-5">
+							<h4>PREPARATION</h4>
+							<p class="bg-info">Lorem ipsum dolor sit amet, consecteur</p>
+						</div>
+					</div>
+					<div id="printoutMenu-example" class="col-xs-12">
+						<div id="printoutDish-img" class="col-xs-2">
+							<img class="img-thumbnail" src="images/bakedbrie.jpg">
+						</div>
+						<div id="printoutDish-description" class="col-xs-5">
+							<h4>LASAGNE</h4>
+							<p class="bg-info">Lorem ipsum dolor sit amet</p>
+						</div>
+						<div id="printoutDish-preparation" class="col-xs-5">
+							<h4>PREPARATION</h4>
+							<p class="bg-info">Lorem ipsum dolor sit amet, consecteur</p>
+						</div>
+					</div>
+					<div class="col-xs-1"></div>
+				</div>
 			</div>
 
 		</div>
@@ -166,6 +274,8 @@
 	<script src="js/view/navigationBar.js"></script>
 	<script src="js/view/startWizard.js"></script>
 	<script src="js/view/detailedDish.js"></script>
+	<script src="js/view/confirmDinner.js"></script>
+	<script src="js/view/printRecipe.js"></script>
 	<script src="js/view/exampleView.js"></script>
 	<script src="js/view/exampleViewController.js"></script>
   </body>
