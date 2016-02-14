@@ -42,6 +42,7 @@
 						<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
 				</div>
+
 				<div id="dinnerDishes-panel">
 					<table id="dinnerDishes-list" class="table table-striped">
 						<thead>
@@ -65,10 +66,71 @@
 				</div>
 			</div>
 
-			<div id="selectDish-panel">
+			<div id="selectDish-panel" class="col-xs-9">
 				<div id="selectDish-filter"></div>
 					<h4>SELECT DISH</h4>
-				<div id="dishesList"></div>
+					<div id="filter-bar">
+						<form class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" id="dish-keyword" placeholder="Enter key words" />
+							</div>
+							<button type="submit" class="btn btn-default">Search</button>
+							<select class="form-control">
+								<option>Main</option>
+								<option>Drinks</option>
+							</select>
+						</form>
+					</div>
+				<div id="dishesList" class="marketing">
+					<div id="dish-example" class="col-xs-4" style="margin-top: 20px; text-align: center">
+						<img src="images/bakedbrie.jpg" class="img-circle" alt="Dish-example, bakedbrie" width="100" height="100">
+						<h2>Heading</h2>
+						<p>Brief description about the example dish.</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="dishInfo-panel" class="col-xs-9">
+				<div id="dish-description" class="col-xs-5">
+					<h3>LASAGNE</h3>
+					<img src="images/bakedbrie.jpg" alt="Dish-example, bakedbrie">
+					<p id="dish-introduction">lorem ipsum...</p>
+					<div id="back-to-selectDishes">
+						<button class="btn btn-primary">back to Select Dish</button>
+					</div>
+				</div>
+
+				<div id="dish-ingredient" class="col-xs-7">
+					<table class="table table-striped">
+						<caption>INGREDIENTS FOR 4 PEOPLE</caption>
+						<thead>
+							<tr>
+								<th>Amount</th>
+								<th>Name</th>
+								<th>Currency</th>
+								<th>Cost</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2tbsp</td>
+								<td>olive oil</td>
+								<td>SEK</td>
+								<td>0.20</td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>750g</td>
+								<td>lean beef mince</td>
+								<td>SEK</td>
+								<td>10.00</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div id="dish-preparation"></div>
 			</div>
 
 		</div>
@@ -103,6 +165,7 @@
 	<script src="js/model/dinnerModel.js"></script>
 	<script src="js/view/navigationBar.js"></script>
 	<script src="js/view/startWizard.js"></script>
+	<script src="js/view/detailedDish.js"></script>
 	<script src="js/view/exampleView.js"></script>
 	<script src="js/view/exampleViewController.js"></script>
   </body>
