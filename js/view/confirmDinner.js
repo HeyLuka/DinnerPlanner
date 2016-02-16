@@ -13,6 +13,7 @@ var ConfirmDinner = function(container) {
 
 	this.myMenu_detail = container.find("#myMenu-detail");
 
+
 	for(key in model.dishes) {
 		var dish_instance = document.createElement('div');
 		$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
@@ -35,6 +36,11 @@ var ConfirmDinner = function(container) {
 		$(dish_instance).append(dish_instance_img);
 		$(dish_instance).append(dish_instance_name);
 		$(dish_instance).append(dish_instance_desc);
+
+		this.myMenu_total_cost = container.find("#myMenu-total-cost");
+
+		var totalMenuPrice = model.getTotalMenuPrice();
+		this.myMenu_total_cost.html(totalMenuPrice+' Sek');
 
 	}
 }

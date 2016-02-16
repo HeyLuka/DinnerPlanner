@@ -162,20 +162,18 @@
 			<div id="confirmDinner-page">
 				<div class="col-xs-12" style="padding:40px">
 					<h4 class="col-xs-10">My Dinner:</h4>
-					<button class="btn btn-primary">Go back and edit dinner</button>
+					<button class="btn btn-primary" onclick="back_to_myDinnerBar()">Go back and edit dinner</button>
 				</div>
 
 				<div id="myMenu-detail" class="col-xs-9">
-
-
 				</div>
         <div id="myMenu-totalCost" class="col-xs-3">
-          <p class="bg-info">Total:</p>
-          <p id="myMenu-total-cost">341.20 SEK</p>
+          <span class="bg-info col-xs-3">Total:</span>
+          <span id="myMenu-total-cost" class="col-xs-9"></span>
         </div>
 				<div id="printMenu-button">
 					<div class="col-xs-5"></div>
-					<button class="btn btn-primary col-xs-2">Print Full Recipe</button>
+					<button class="btn btn-primary col-xs-2" onclick="go_to_printRecipe()">Print Full Recipe</button>
 					<div class="col-xs-5"></div>
 				</div>
 			</div>
@@ -274,6 +272,13 @@
 			myDinnerBar = new MyDinnerBar($("#displayField"));
 		}
 
+    function back_to_myDinnerBar(){
+      myDinnerBar = new MyDinnerBar($("#displayField"));
+    }
+
+    function go_to_printRecipe(){
+      printRecipe = new PrintRecipe($("#displayField"));
+    }
 	</script>
 
 
