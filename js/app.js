@@ -20,14 +20,14 @@ var navigationBar;
 $(document).ready(function() {
 	model = new DinnerModel();
 
-	exampleView = new ExampleView($("#exampleView"));
+	// exampleView = new ExampleView($("#exampleView"));
 
 	navigationBar = new NavigationBar($("#navigationBar"));
 	// startWizard = new StartWizard($("#displayField"));
-	// myDinnerBar = new MyDinnerBar($("#displayField"));
+	myDinnerBar = new MyDinnerBar($("#displayField"));
 	// detailedDish = new DetailedDish($("#displayField"));
 	// confirmDinner = new ConfirmDinner($("#displayField"));
-	printRecipe = new PrintRecipe($("#displayField"));
+	// printRecipe = new PrintRecipe($("#displayField"));
 })
 
 

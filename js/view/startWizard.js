@@ -23,12 +23,26 @@ var StartWizard = function (container) {
 	});
 	*/
 
+	// Try hidding components that is not used in this page
+	this.myDinner_bar = container.find("#myDinner-bar");
+	this.myDinner_bar.hide();
+	//this.main_content.hide();
+	this.selectDish_panel = container.find("#selectDish-panel");
+	this.selectDish_panel.hide();
+	this.dishInfo_panel = container.find("#dishInfo-panel");
+	this.dishInfo_panel.hide();
+	this.confirmDinner_page = container.find("#confirmDinner-page");
+	this.confirmDinner_page.hide();
+	this.printoutMenu_page = container.find("#printoutMenu-page");
+	this.printoutMenu_page.hide();
+
+
 	// Get all relavant elements of the view
 	this.main_content = container.find("#main-content");
 	this.main_content.addClass("row");
-	this.myDinner_bar = container.find("#myDinner-bar");
+	// this.myDinner_bar = container.find("#myDinner-bar");
 	// Hide MyDinnerBar in the index home page
-	this.myDinner_bar.hide();
+	// this.myDinner_bar.hide();
 
 	// Define the related layout of the start-wizard
 	var wizard = document.createElement('div');
@@ -55,6 +69,8 @@ var StartWizard = function (container) {
 	$(wizard_description).html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
 	$(wizard_helper).text("quickly start");
 	$(wizard_button).text("Create new dinner");
+
+	
 
 
 

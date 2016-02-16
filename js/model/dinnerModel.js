@@ -6,8 +6,8 @@ var DinnerModel = function() {
 	var menu = [];
 
 
-  var numberOfGuests = 0;
-
+  	var numberOfGuests = 6;
+  	//this.numberOfGuests = 6;
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
