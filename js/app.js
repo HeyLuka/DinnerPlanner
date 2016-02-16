@@ -29,5 +29,3 @@ $(document).ready(function() {
 	// confirmDinner = new ConfirmDinner($("#displayField"));
 	printRecipe = new PrintRecipe($("#displayField"));
 })
-
-
