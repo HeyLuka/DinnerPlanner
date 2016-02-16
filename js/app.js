@@ -24,9 +24,9 @@ $(document).ready(function() {
 
 	navigationBar = new NavigationBar($("#navigationBar"));
 	// startWizard = new StartWizard($("#displayField"));
-	//myDinnerBar = new MyDinnerBar($("#displayField"));
+	myDinnerBar = new MyDinnerBar($("#displayField"));
 	// detailedDish = new DetailedDish($("#displayField"));
-	confirmDinner = new ConfirmDinner($("#displayField"));
+	// confirmDinner = new ConfirmDinner($("#displayField"));
 	// printRecipe = new PrintRecipe($("#displayField"));
 	// $("#main-content").hide();
 })
