@@ -28,6 +28,7 @@ $(document).ready(function() {
 	// detailedDish = new DetailedDish($("#displayField"));
 	// confirmDinner = new ConfirmDinner($("#displayField"));
 	// printRecipe = new PrintRecipe($("#displayField"));
+	// $("#main-content").hide();
 })
 
 
