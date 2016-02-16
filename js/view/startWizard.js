@@ -69,6 +69,7 @@ var StartWizard = function (container) {
 	$(wizard_description).html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
 	$(wizard_helper).text("quickly start");
 	$(wizard_button).text("Create new dinner");
+	$(wizard_button).attr("onclick", "quickstart()");
 
 	
 

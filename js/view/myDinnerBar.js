@@ -7,16 +7,16 @@ var MyDinnerBar = function(container) {
 
 	// Define the layout of myDinner Bar
 
-	// Try hidding components that is not used in this page
-	//this.myDinner_bar.hide();
+	// try hidding components that is not used in this page
+	//this.mydinner_bar.hide();
 	//this.main_content.hide();
-	// this.selectDish_panel.hide();
-	this.dishInfo_panel = container.find("#dishInfo-panel");
-	this.dishInfo_panel.hide();
-	this.confirmDinner_page = container.find("#confirmDinner-page");
-	this.confirmDinner_page.hide();
-	this.printoutMenu_page = container.find("#printoutMenu-page");
-	this.printoutMenu_page.hide();
+	// this.selectdish_panel.hide();
+	this.dishinfo_panel = container.find("#dishInfo-panel");
+	this.dishinfo_panel.hide();
+	this.confirmdinner_page = container.find("#confirmDinner-page");
+	this.confirmdinner_page.hide();
+	this.printoutmenu_page = container.find("#printoutMenu-page");
+	this.printoutmenu_page.hide();
 
 	// Functions to be handled in this page
 	this.numberOfGuests = container.find("#numberOfGuests");
