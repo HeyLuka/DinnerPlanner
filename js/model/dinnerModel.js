@@ -27,14 +27,14 @@ var DinnerModel = function() {
 		//TODO Lab 2
     var selectDishMenu = [];
     for(key in menu){
-      if(dishes[menu[key]].type == type){
+      if(this.dishes[menu[key]].type == type){
         selectDishMenu.push(this.getDish(menu[key]));
       }
     }
     return selectDishMenu;
 	}
 
-	//Returns all the dishes on the menu.
+	//Returns all the this.dishes on the menu.
 	this.getFullMenu = function() {
 		//TODO Lab 2
     var menuDishes = [];
@@ -44,7 +44,7 @@ var DinnerModel = function() {
     return menuDishes;
 	}
 
-	//Returns all ingredients for all the dishes on the menu.
+	//Returns all ingredients for all the this.dishes on the menu.
 	this.getAllIngredients = function() {
 		//TODO Lab 2
     var allIngredients = [];
@@ -73,8 +73,8 @@ var DinnerModel = function() {
         return;
       }
     }
-		for(key in dishes){
-      if(dishes[key].id == id){
+		for(key in this.dishes){
+      if(this.dishes[key].id == id){
         menu.push(id);
       }
     }
@@ -92,11 +92,11 @@ var DinnerModel = function() {
     }
 	}
 
-	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
+	//function that returns all this.dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
-	//if you don't pass any filter all the dishes will be returned
+	//if you don't pass any filter all the this.dishes will be returned
 	this.getAllDishes = function (type,filter) {
-	  return $(dishes).filter(function(index,dish) {
+	  return $(this.dishes).filter(function(index,dish) {
 		var found = true;
 		// if any valid filter parameter is passed, the following operation would be processed.
 		if(filter){
@@ -118,16 +118,16 @@ var DinnerModel = function() {
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].id == id) {
-				return dishes[key];
+	  for(key in this.dishes){
+			if(this.dishes[key].id == id) {
+				return this.dishes[key];
 			}
 		}
 	}
 
 
-	// the dishes variable contains an array of all the
-	// dishes in the database. each dish has id, name, type,
+	// the this.dishes variable contains an array of all the
+	// this.dishes in the database. each dish has id, name, type,
 	// image (name of the image file), description and
 	// array of ingredients. Each ingredient has name,
 	// quantity (a number), price (a number) and unit (string
