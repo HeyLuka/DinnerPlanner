@@ -38,6 +38,7 @@ var MyDinnerBar = function(container) {
 		var dish_instance_name = document.createElement('h3');
 		$(dish_instance_name).text(model.getDish(model.dishes[key].id)["name"]);
 		var dish_instance_desc = document.createElement('p');	
+		$(dish_instance_desc).attr("style", "text-align: left")
 		// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
 		var temp_string = model.getDish(model.dishes[key].id)["description"];
 		if(temp_string.length > 120){
