@@ -5,9 +5,8 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	this.menu = [];
 
-
-  this.numberOfGuests = 0;
-
+  	//this.numberOfGuests = 6;
+	this.numberOfGuests = 0;
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
