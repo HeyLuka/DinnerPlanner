@@ -11,19 +11,16 @@ $(function() {
 });
 */
 
-var model;
+//var model;
 
-// var exampleView;
-
-// var navigationBar;
 
 
 $(document).ready(function() {
-	model = new DinnerModel();
+	var model = new DinnerModel();
 
 	// exampleView = new ExampleView($("#exampleView"));
 
-	// navigationBar = new NavigationBar($("#navigationBar"));
+
 	startWizard = new StartWizard($("#displayField"));
 	// myDinnerBar = new MyDinnerBar($("#displayField"));
 	// detailedDish = new DetailedDish($("#displayField"));
