@@ -3,7 +3,9 @@ var MyDinnerBar = function(container) {
 	// Get all relevant elements of the view
 	// this.main_content = container.find("#myDinner-bar");
 	this.myDinner_bar = container.find("#myDinner-bar");
+	this.myDinner_bar.show();
 	this.selectDish_panel = container.find("#selectDish-panel");
+	this.selectDish_panel.show();
 
 	// Define the layout of myDinner Bar
 
@@ -20,6 +22,7 @@ var MyDinnerBar = function(container) {
 
 	// Functions to be handled in this page
 	this.numberOfGuests = container.find("#numberOfGuests");
+	this.numberOfGuests.show();
 	this.numberOfGuests.text(model.numberOfGuests);
 
 	// alert(model.getDish(1));
@@ -27,6 +30,7 @@ var MyDinnerBar = function(container) {
 
 	// Filter the contents and then list all available dishes
 	this.dishesList = container.find("#dishesList");
+	this.dishesList.show();
 	// this.dishesList.html('<div id="dish-example" class="col-xs-4" style="margin-top: 20px; text-align: center"><img src="images/bakedbrie.jpg" class="img-circle" alt="Dish-example, bakedbrie" width="100" height="100"><h2>Heading</h2><p>Brief description about the example dish.</p></div>');
 	for(key in model.dishes) {
 		var dish_instance = document.createElement('div');
@@ -37,7 +41,7 @@ var MyDinnerBar = function(container) {
 		$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
 		var dish_instance_name = document.createElement('h3');
 		$(dish_instance_name).text(model.getDish(model.dishes[key].id)["name"]);
-		var dish_instance_desc = document.createElement('p');	
+		var dish_instance_desc = document.createElement('p');
 		$(dish_instance_desc).attr("style", "text-align: left")
 		// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
 		var temp_string = model.getDish(model.dishes[key].id)["description"];
@@ -51,6 +55,6 @@ var MyDinnerBar = function(container) {
 		$(dish_instance).append(dish_instance_name);
 		$(dish_instance).append(dish_instance_desc);
 
-	}	
+	}
 
 }
