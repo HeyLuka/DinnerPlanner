@@ -23,6 +23,8 @@ var StartWizard = function (container) {
 	});
 	*/
 
+	// Display all the components that would be used in this page
+
 	// Try hidding components that is not used in this page
 	this.myDinner_bar = container.find("#myDinner-bar");
 	this.myDinner_bar.hide();
@@ -58,22 +60,23 @@ var StartWizard = function (container) {
 	$(wizard_button).attr({"id": "start-button", "type": "button"});
 	$(wizard_button).addClass("btn btn-primary");
 
-	this.main_content.append(wizard);
-	$(wizard).append(wizard_header);
-	$(wizard).append(wizard_description);
-	$(wizard).append(wizard_helper);
-	$(wizard).append(wizard_button);
+	
 	// Finish the definition about the layout, then continue do with the content filling
 
 	$(wizard_header).html("A Home Dinner Service");
 	$(wizard_description).html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
 	$(wizard_helper).text("quickly start");
 	$(wizard_button).text("Create new dinner");
-	$(wizard_button).attr("onclick", "quickstart()");
+	// $(wizard_button).click("quick_start()");
+	$(wizard_button).attr("onclick", '(function(){ myDinnerBar = new MyDinnerBar($("#displayField"));})()');
 
-	
+	$(wizard).append(wizard_header);
+	$(wizard).append(wizard_description);
+	$(wizard).append(wizard_helper);
+	$(wizard).append(wizard_button);
 
-
+	this.main_content.prepend(wizard);
 
 	// this.wizardDescription.html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
 }
+

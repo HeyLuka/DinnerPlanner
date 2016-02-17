@@ -26,13 +26,17 @@
 	</div>
 	-->
 	<div id="navigationBar" class="container">
-		<h1 id="main-header" onclick="backto_home()"></h1>
-		<h4 id="sub-header"></h4>
+		<h1 id="main-header" onclick="back_to_home()">HOMELETTE</h1>
+		<h4 id="sub-header">From the best chefs in the world directly into your kitchen</h4>
 	</div>
 
 	<div id="displayField" class="container">
 		<div id="main-content" class="row">
-
+		<!--
+			<div id="startWizard">
+				blabla
+			</div>		
+		-->
 			<div id="myDinner-bar" class="col-xs-3">
 				<h4 id="dinnerBar-title">My Dinner</h4>
 				<div id="numberOfGuests-panel">
@@ -285,10 +289,16 @@
 
 	<!-- The function for navigation bar in the top -->
 	<script type="text/javascript">
-		function backto_home() {
-			navigationBar = new NavigationBar($("#navigationBar"));
+		function back_to_home() {
 			startWizard = new StartWizard($("#displayField"));
+			// navigationBar = new NavigationBar($("#navigationBar"));
 		}
+
+		// function for starting new menu
+		function quick_start() {
+			myDinnerBar = new MyDinnerBar($("#displayField"));
+		}
+
 	</script>
 
 
