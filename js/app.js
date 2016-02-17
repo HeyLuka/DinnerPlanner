@@ -11,12 +11,12 @@ $(function() {
 });
 */
 
-//var model;
+var model;
 
 
 
 $(document).ready(function() {
-	var model = new DinnerModel();
+	model = new DinnerModel();
 
 	// exampleView = new ExampleView($("#exampleView"));
 

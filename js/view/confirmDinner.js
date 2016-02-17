@@ -16,6 +16,7 @@ var ConfirmDinner = function(container) {
 	this.confirmDinner_page.show();
 
 	this.myMenu_detail = container.find("#myMenu-detail");
+	this.myMenu_detail.empty();
 
 
 	for(key in model.menu) {

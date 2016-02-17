@@ -68,7 +68,7 @@
 					</table>
 					<div id="myDinner-price" style="text-align: right">SEK<span id="detailed-price">0.00</span></div>
 					<div>
-						<button id="confirm-myDinner" class="btn btn-primary">Confirm Dinner</button>
+						<button id="confirm-myDinner" class="btn btn-primary" onclick="go_to_dinnerConfirm();">Confirm Dinner</button>
 					</div>
 				</div>
 			</div>
@@ -289,7 +289,12 @@
 	    }
 
 	    function append_to_myDinnerBar() {
+	    	model.menu.push(1);
+	    	myDinnerBar = new MyDinnerBar($("#displayField"));
+	    }
 
+	    function go_to_dinnerConfirm() {
+			confirmDinner = new ConfirmDinner($("#displayField"));
 	    }
 
 	    function go_to_printRecipe(){

@@ -12,6 +12,7 @@ var PrintRecipe = function(container) {
 	this.dishInfo_panel.hide();
 	this.confirmDinner_page.hide();
 	this.printoutMenu_page.show();
+	// this.printoutMenu_page.empty();
 
 	this.printoutMenu_info = container.find("#printoutMenu-info");
 	for(key in model.menu){
