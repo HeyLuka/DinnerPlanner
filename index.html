@@ -55,7 +55,10 @@
 								<th>Cost</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="menuDishes-list">
+							
+						</tbody>
+						<tbody id="menu-pending">
 							<tr id="default-menu-row">
 								<td>Pending</td>
 								<td>0.00</td>
@@ -146,7 +149,7 @@
 							<tr>
 								<td colspan="2"></td>
 								<td colspan="2">
-									<button class="btn btn-primary">Confirm Dish</button>
+									<button class="btn btn-primary" onclick="append_to_myDinnerBar();">Confirm Dish</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -173,10 +176,12 @@
 
 				<div id="myMenu-detail" class="col-xs-9">
 				</div>
-        <div id="myMenu-totalCost" class="col-xs-3">
-          <span class="bg-info col-xs-3">Total:</span>
-          <span id="myMenu-total-cost" class="col-xs-9"></span>
-        </div>
+
+				<div id="myMenu-totalCost" class="col-xs-3">
+					<span class="bg-info col-xs-3">Total:</span>
+			        <span id="myMenu-total-cost" class="col-xs-9"></span>
+				</div>
+
 				<div id="printMenu-button">
 					<div class="col-xs-5"></div>
 					<button class="btn btn-primary col-xs-2" onclick="go_to_printRecipe()">Print Full Recipe</button>
@@ -278,18 +283,23 @@
 			myDinnerBar = new MyDinnerBar($("#displayField"));
 		}
 
-    function back_to_myDinnerBar(){
-      myDinnerBar = new MyDinnerBar($("#displayField"));
-    }
+    	function back_to_myDinnerBar(){
+	    	myDinnerBar = new MyDinnerBar($("#displayField"));
+	    }
 
-    function go_to_printRecipe(){
-      printRecipe = new PrintRecipe($("#displayField"));
-    }
+	    function append_to_myDinnerBar() {
+
+	    }
+
+	    function go_to_printRecipe(){
+	    	printRecipe = new PrintRecipe($("#displayField"));
+	    }
 	</script>
 
 	<!-- The function for navigation bar in the top -->
 	<script type="text/javascript">
 		function back_to_home() {
+			$("#start-wizard").hide();
 			startWizard = new StartWizard($("#displayField"));
 			// navigationBar = new NavigationBar($("#navigationBar"));
 		}

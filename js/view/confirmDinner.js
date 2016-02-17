@@ -11,6 +11,10 @@ var ConfirmDinner = function(container) {
 	this.dishInfo_panel.hide();
 	this.printoutMenu_page.hide();
 
+	// Show the necessary components used in this page
+	this.confirmDinner_page = container.find("#confirmDinner-page");
+	this.confirmDinner_page.show();
+
 	this.myMenu_detail = container.find("#myMenu-detail");
 
 

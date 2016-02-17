@@ -10,12 +10,15 @@ var DetailedDish = function(container) {
 	//this.mydinner_bar.hide();
 	//this.main_content.hide();
 	// this.selectdish_panel.hide();
-	this.dishInfo_panel = container.find("#dishInfo-panel");
 	// this.dishInfo_panel.hide();
 	this.confirmDinner_page = container.find("#confirmDinner-page");
 	this.confirmDinner_page.hide();
 	this.printoutMenu_page = container.find("#printoutMenu-page");
 	this.printoutMenu_page.hide();
+
+	// Show the essential components in this page
+	this.dishInfo_panel = container.find("#dishInfo-panel");
+	this.dishInfo_panel.show();
 
 	// Functions to be handled in this page
 	this.numberOfGuests = container.find("#numberOfGuests");
@@ -24,6 +27,9 @@ var DetailedDish = function(container) {
 	this.dish_description = container.find("#dish-description");
 	this.dish_ingredient_table_tbody = container.find("#dish-ingredient-tbody");
 	this.dish_preparation = container.find("#dish-preparation");
+
+	this.dish_description.empty();
+	this.dish_ingredient_table_tbody.empty();
 
 	var dish_desc_title = document.createElement('h3');
 	var test_dish_id = 1;

@@ -13,20 +13,21 @@ $(function() {
 
 var model;
 
-var exampleView;
+// var exampleView;
 
-var navigationBar;
+// var navigationBar;
+
 
 $(document).ready(function() {
 	model = new DinnerModel();
 
 	// exampleView = new ExampleView($("#exampleView"));
 
-	navigationBar = new NavigationBar($("#navigationBar"));
-	// startWizard = new StartWizard($("#displayField"));
+	// navigationBar = new NavigationBar($("#navigationBar"));
+	startWizard = new StartWizard($("#displayField"));
 	// myDinnerBar = new MyDinnerBar($("#displayField"));
 	// detailedDish = new DetailedDish($("#displayField"));
-	confirmDinner = new ConfirmDinner($("#displayField"));
+	// confirmDinner = new ConfirmDinner($("#displayField"));
 	// printRecipe = new PrintRecipe($("#displayField"));
 	// $("#main-content").hide();
 })

@@ -68,7 +68,7 @@ var StartWizard = function (container) {
 	$(wizard_helper).text("quickly start");
 	$(wizard_button).text("Create new dinner");
 	// $(wizard_button).click("quick_start()");
-	$(wizard_button).attr("onclick", '(function(){ myDinnerBar = new MyDinnerBar($("#displayField"));})()');
+	$(wizard_button).attr("onclick", '(function(){myDinnerBar = new MyDinnerBar($("#displayField")); $("#start-wizard").hide();})()');
 
 	$(wizard).append(wizard_header);
 	$(wizard).append(wizard_description);
