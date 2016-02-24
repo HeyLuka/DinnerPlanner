@@ -288,7 +288,8 @@
 	    }
 
 	    function append_to_myDinnerBar() {
-	    	model.menu.push(1);
+	    	// model.menu.push(1);
+	    	model.addDishToMenu(1);
 	    	myDinnerBar = new MyDinnerBar($("#displayField"));
 	    }
 
@@ -304,22 +305,22 @@
 	<!-- The function for navigation bar in the top -->
 	<script type="text/javascript">
 		function back_to_home() {
-			$("#start-wizard").hide();
+
 			startWizard = new StartWizard($("#displayField"));
 			// navigationBar = new NavigationBar($("#navigationBar"));
 		}
 
 		// function for starting new menu
 		function quick_start() {
-      $("#start-wizard").hide();
+			$("#start-wizard").hide();
 			var myDinnerBar = new MyDinnerBar($("#displayField"));
-      var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
+			var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
 		}
 
-    showDetail = function(){
-      var id = $(this).attr("key");
-  		var detailedDish = new DetailedDish($("#displayField"), id);
-  	}
+		showDetail = function(){
+			var id = $(this).attr("key");
+			var detailedDish = new DetailedDish($("#displayField"), id);
+		}
 
 	</script>
 

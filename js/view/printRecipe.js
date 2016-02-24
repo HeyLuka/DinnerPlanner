@@ -41,7 +41,7 @@ var PrintRecipe = function(container) {
 		var dish_instance_preparation_h4 = document.createElement('h4');
 		$(dish_instance_preparation_h4).text("PREPARATION");
 		var dish_instance_preparation_p = document.createElement('p');
-		$(dish_instance_preparation_p).text();
+		$(dish_instance_preparation_p).text(model.getDish(1).preparation);
 		$(dish_instance_preparation_div).append(dish_instance_preparation_h4);
 		$(dish_instance_preparation_div).append(dish_instance_preparation_p);
 

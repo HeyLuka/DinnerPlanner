@@ -33,6 +33,15 @@ var DetailedDish = function(container, id) {
 	this.dish_ingredient_table_tbody.empty();
 
 	var dish_desc_title = document.createElement('h3');
+// <<<<<<< HEAD
+// 	var test_dish_id = 2;
+// 	$(dish_desc_title).text(model.getDish(test_dish_id).name);
+// =======
+// 	var dish_id = id;
+// 	$(dish_desc_title).text(model.getDish(dish_id).name);
+// >>>>>>> 5302bcd041957dd44db54b1d925ef7d9471d4119
+	// var test_dish_id = 2;
+	// $(dish_desc_title).text(model.getDish(test_dish_id).name);
 	var dish_id = id;
 	$(dish_desc_title).text(model.getDish(dish_id).name);
 	var dish_desc_image = document.createElement('img');
