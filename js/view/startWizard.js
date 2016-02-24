@@ -60,15 +60,16 @@ var StartWizard = function (container) {
 	$(wizard_button).attr({"id": "start-button", "type": "button"});
 	$(wizard_button).addClass("btn btn-primary");
 
-	
+
 	// Finish the definition about the layout, then continue do with the content filling
 
 	$(wizard_header).html("A Home Dinner Service");
 	$(wizard_description).html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
 	$(wizard_helper).text("quickly start");
 	$(wizard_button).text("Create new dinner");
-	// $(wizard_button).click("quick_start()");
-	$(wizard_button).attr("onclick", '(function(){myDinnerBar = new MyDinnerBar($("#displayField")); $("#start-wizard").hide();})()');
+	$(wizard_button).click(quick_start);
+	//$(wizard_button).bind("click", quick_start);
+	//$(wizard_button).attr("onclick", '(function(){myDinnerBar = new MyDinnerBar($("#displayField")); $("#start-wizard").hide();})()');
 
 	$(wizard).append(wizard_header);
 	$(wizard).append(wizard_description);
@@ -79,4 +80,3 @@ var StartWizard = function (container) {
 
 	// this.wizardDescription.html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.");
 }
-
