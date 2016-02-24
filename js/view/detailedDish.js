@@ -3,8 +3,9 @@ var DetailedDish = function(container, id) {
 	// Get all relavant elements of the view
 	this.main_content = container.find("#main-content");
 	this.selectDish_panel = container.find("#selectDish-panel");
-
 	this.selectDish_panel.hide();
+
+	this.confirm_dish = container.find("#confirm-dish");
 
 	// try hidding components that is not used in this page
 	//this.mydinner_bar.hide();
@@ -66,9 +67,15 @@ var DetailedDish = function(container, id) {
 	}
 
 	// show preparation steps related with this dish
+}
 
-
-
+var DetailedDishController = function(view, model){
+	view.confirm_dish.click(function(){
+		view.dishInfo_panel.hide();
+		view.selectdish_panel.show();
+		model.addDishToMenu();
+		model.notifyObservers("updatemenu");
+	});
 
 
 }
