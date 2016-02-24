@@ -149,7 +149,7 @@
 							<tr>
 								<td colspan="2"></td>
 								<td colspan="2">
-									<button class="btn btn-primary" onclick="append_to_myDinnerBar();">Confirm Dish</button>
+									<button id="confirm-dish" class="btn btn-primary">Confirm Dish</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -283,13 +283,12 @@
 			myDinnerBar = new MyDinnerBar($("#displayField"));
 		}*/
 
-    	function back_to_myDinnerBar(){
+    	/*function back_to_myDinnerBar(){
 	    	myDinnerBar = new MyDinnerBar($("#displayField"));
-	    }
+	    }*/
 
 	    function append_to_myDinnerBar() {
-	    	// model.menu.push(1);
-	    	model.addDishToMenu(1);
+	    	model.menu.push(1);
 	    	myDinnerBar = new MyDinnerBar($("#displayField"));
 	    }
 
@@ -305,22 +304,23 @@
 	<!-- The function for navigation bar in the top -->
 	<script type="text/javascript">
 		function back_to_home() {
-
+			$("#start-wizard").hide();
 			startWizard = new StartWizard($("#displayField"));
 			// navigationBar = new NavigationBar($("#navigationBar"));
 		}
 
 		// function for starting new menu
 		function quick_start() {
-			$("#start-wizard").hide();
+      $("#start-wizard").hide();
 			var myDinnerBar = new MyDinnerBar($("#displayField"));
-			var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
+      var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
 		}
 
-		showDetail = function(){
-			var id = $(this).attr("key");
-			var detailedDish = new DetailedDish($("#displayField"), id);
-		}
+    showDetail = function(){
+      var id = $(this).attr("key");
+  		var detailedDish = new DetailedDish($("#displayField"), id);
+      var detailedDishController = new DetailedDishController(detailedDish, model);
+  	}
 
 	</script>
 

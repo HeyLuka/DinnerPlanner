@@ -112,6 +112,7 @@ var MyDinnerBar = function(container) {
 				break;
 			case "updateMyMenu":
 				// Insert data to my Menu
+				this.menuDish_list.empty();
 				for(var menu_key in model.menu) {
 					var menudish_instance = document.createElement('tr');
 					var instance_name = document.createElement('td');
@@ -123,10 +124,6 @@ var MyDinnerBar = function(container) {
 					$(menudish_instance).append(instance_cost);
 					this.menuDish_list.append(menudish_instance);
 
-					this.dishesList.append(dish_instance);
-					$(dish_instance).append(dish_instance_img);
-					$(dish_instance).append(dish_instance_name);
-					$(dish_instance).append(dish_instance_desc);
 
 				}
 				// Set total price of my Menu
