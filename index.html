@@ -289,7 +289,8 @@
 	    }
 
 	    function append_to_myDinnerBar() {
-	    	model.menu.push(1);
+	    	// model.menu.push(1);
+	    	model.addDishToMenu(1);
 	    	myDinnerBar = new MyDinnerBar($("#displayField"));
 	    }
 
@@ -305,7 +306,7 @@
 	<!-- The function for navigation bar in the top -->
 	<script type="text/javascript">
 		function back_to_home() {
-			$("#start-wizard").hide();
+
 			startWizard = new StartWizard($("#displayField"));
 			// navigationBar = new NavigationBar($("#navigationBar"));
 		}

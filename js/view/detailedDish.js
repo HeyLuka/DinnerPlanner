@@ -32,7 +32,7 @@ var DetailedDish = function(container) {
 	this.dish_ingredient_table_tbody.empty();
 
 	var dish_desc_title = document.createElement('h3');
-	var test_dish_id = 1;
+	var test_dish_id = 2;
 	$(dish_desc_title).text(model.getDish(test_dish_id).name);
 	var dish_desc_image = document.createElement('img');
 	$(dish_desc_image).attr({"src": "./images/"+model.getDish(test_dish_id).image});
