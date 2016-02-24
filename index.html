@@ -35,15 +35,15 @@
 		<!--
 			<div id="startWizard">
 				blabla
-			</div>		
+			</div>
 		-->
 			<div id="myDinner-bar" class="col-xs-3">
 				<h4 id="dinnerBar-title">My Dinner</h4>
 				<div id="numberOfGuests-panel">
 					<p>Number of guests: <span id="numberOfGuests"></span></p>
 					<div id="numberOfGuests-function">
-						<button id="minusGuest" class="btn" onclick="decreaseGuest()";><span class="glyphicon glyphicon-minus"></span></button>
-						<button id="plusGuest" class="btn" onclick="increaseGuest()";><span class="glyphicon glyphicon-plus"></span></button>
+						<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+						<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
 				</div>
 
@@ -56,7 +56,7 @@
 							</tr>
 						</thead>
 						<tbody id="menuDishes-list">
-							
+
 						</tbody>
 						<tbody id="menu-pending">
 							<tr id="default-menu-row">
@@ -246,7 +246,6 @@
 		<!-- this is codes for constructing the confirmation information for the dinner plan. -->
 
 
-
 	</div>
 
     <!-- jQuery -->
@@ -270,7 +269,7 @@
 
 	<!-- The application event functions -->
 	<script type="text/javascript">
-		function decreaseGuest() {
+		/*function decreaseGuest() {
 			model.setNumberOfGuests(model.getNumberOfGuests()-1);
 			// model.numberOfGuests = 5;
 			// model.numberOfGuests -= 1;
@@ -282,7 +281,7 @@
 			// model.numberOfGuests = 5;
 			// model.numberOfGuests -= 1;
 			myDinnerBar = new MyDinnerBar($("#displayField"));
-		}
+		}*/
 
     	function back_to_myDinnerBar(){
 	    	myDinnerBar = new MyDinnerBar($("#displayField"));
@@ -313,8 +312,15 @@
 
 		// function for starting new menu
 		function quick_start() {
-			myDinnerBar = new MyDinnerBar($("#displayField"));
+      $("#start-wizard").hide();
+			var myDinnerBar = new MyDinnerBar($("#displayField"));
+      var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
 		}
+
+    showDetail = function(){
+      var id = $(this).attr("key");
+  		var detailedDish = new DetailedDish($("#displayField"), id);
+  	}
 
 	</script>
 

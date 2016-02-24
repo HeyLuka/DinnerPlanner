@@ -38,8 +38,11 @@ var MyDinnerBar = function(container) {
 	this.menuDish_list = container.find("#menuDishes-list");
 	this.menuDish_list.empty();
 
+	this.plusGuest = container.find("#plusGuest");
+	this.minusGuest = container.find("#minusGuest");
+
 	// Insert data to my Menu
-	for(menu_key in model.menu) {
+	for(var menu_key in model.menu) {
 		var menudish_instance = document.createElement('tr');
 		var instance_name = document.createElement('td');
 		$(instance_name).text(model.getDish(model.menu[menu_key]).name);
@@ -64,15 +67,22 @@ var MyDinnerBar = function(container) {
 
 
 	// this.dishesList.html('<div id="dish-example" class="col-xs-4" style="margin-top: 20px; text-align: center"><img src="images/bakedbrie.jpg" class="img-circle" alt="Dish-example, bakedbrie" width="100" height="100"><h2>Heading</h2><p>Brief description about the example dish.</p></div>');
-	for(key in model.dishes) {
+	for(var key in model.dishes) {
 		var dish_instance = document.createElement('div');
 		$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
 		$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
 		var dish_instance_img = document.createElement('img');
 		$(dish_instance_img).attr({"src": "images/"+model.getDish(model.dishes[key].id)["image"]});
 		$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
-		// $(dish_instance_img).attr({"onclick": '(function()={ detailedDish = new DetailedDish($("#displayField"));})()'});
-		$(dish_instance_img).attr("onclick", '(function(){ detailedDish = new DetailedDish($("#displayField"));})()');
+		$(dish_instance_img).attr("key", model.dishes[key].id);
+		/*$(dish_instance_img).click(function(){
+      //var id = $(this).attr(width);
+			alert(1);
+  		//var detailedDish = new DetailedDish($("#displayField"), id);
+  	});*/
+		$(dish_instance_img).click(showDetail);
+		//$(dish_instance_img).attr("onclick", '(function(){var id = this.attr("key");var detailedDish = new DetailedDish($("#displayField"), id);})()');
+		//$(dish_instance_img).click((function(){var detailedDish = new DetailedDish($("#displayField"), 2))());
 		var dish_instance_name = document.createElement('h3');
 		$(dish_instance_name).text(model.getDish(model.dishes[key].id)["name"]);
 		var dish_instance_desc = document.createElement('p');
@@ -90,5 +100,30 @@ var MyDinnerBar = function(container) {
 		$(dish_instance).append(dish_instance_desc);
 
 	}
+
+
+
+	model.addObserver(this);
+	this.update = function(argv){
+		switch (argv) {
+			case "changeNumberofGuests":
+				this.numberOfGuests.text(model.numberOfGuests);
+				break;
+			default:
+
+		}
+	}
+
+}
+
+var MyDinnerBarController = function(view, model){
+	view.plusGuest.click(function(){
+		model.setNumberOfGuests(model.getNumberOfGuests() + 1);
+		model.notifyObservers("changeNumberofGuests");
+	});
+	view.minusGuest.click(function(){
+		model.setNumberOfGuests(model.getNumberOfGuests() - 1);
+		model.notifyObservers("changeNumberofGuests");
+	});
 
 }
