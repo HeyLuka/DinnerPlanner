@@ -83,7 +83,7 @@ var DetailedDishController = function(view, model){
 		view.dishInfo_panel.hide();
 		view.selectdish_panel.show();
 		model.addDishToMenu();
-		model.notifyObservers("updatemenu");
+		model.notifyObservers("updateMyMenu");
 	});
 
 
