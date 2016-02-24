@@ -41,27 +41,27 @@ var MyDinnerBar = function(container) {
 	this.plusGuest = container.find("#plusGuest");
 	this.minusGuest = container.find("#minusGuest");
 
-	// Insert data to my Menu
-	for(var menu_key in model.menu) {
-		var menudish_instance = document.createElement('tr');
-		var instance_name = document.createElement('td');
-		$(instance_name).text(model.getDish(model.menu[menu_key]).name);
-		var instance_cost = document.createElement('td');
-		$(instance_cost).text(model.getDishPrice(model.menu[menu_key]));
+	// // Insert data to my Menu
+	// for(var menu_key in model.menu) {
+	// 	var menudish_instance = document.createElement('tr');
+	// 	var instance_name = document.createElement('td');
+	// 	$(instance_name).text(model.getDish(model.menu[menu_key]).name);
+	// 	var instance_cost = document.createElement('td');
+	// 	$(instance_cost).text(model.getDishPrice(model.menu[menu_key]));
 
-		$(menudish_instance).append(instance_name);
-		$(menudish_instance).append(instance_cost);
-		this.menuDish_list.append(menudish_instance);
+	// 	$(menudish_instance).append(instance_name);
+	// 	$(menudish_instance).append(instance_cost);
+	// 	this.menuDish_list.append(menudish_instance);
 
-		this.dishesList.append(dish_instance);
-		$(dish_instance).append(dish_instance_img);
-		$(dish_instance).append(dish_instance_name);
-		$(dish_instance).append(dish_instance_desc);
+	// 	this.dishesList.append(dish_instance);
+	// 	$(dish_instance).append(dish_instance_img);
+	// 	$(dish_instance).append(dish_instance_name);
+	// 	$(dish_instance).append(dish_instance_desc);
 
-	}
+	// }
 
-	// Set total price of my Menu
-	this.myMenu_totalprice.text(model.getTotalMenuPrice());
+	// // Set total price of my Menu
+	// this.myMenu_totalprice.text(model.getTotalMenuPrice());
 
 
 
@@ -104,10 +104,33 @@ var MyDinnerBar = function(container) {
 
 
 	model.addObserver(this);
+
 	this.update = function(argv){
 		switch (argv) {
 			case "changeNumberofGuests":
 				this.numberOfGuests.text(model.numberOfGuests);
+				break;
+			case "updateMyMenu":
+				// Insert data to my Menu
+				for(var menu_key in model.menu) {
+					var menudish_instance = document.createElement('tr');
+					var instance_name = document.createElement('td');
+					$(instance_name).text(model.getDish(model.menu[menu_key]).name);
+					var instance_cost = document.createElement('td');
+					$(instance_cost).text(model.getDishPrice(model.menu[menu_key]));
+
+					$(menudish_instance).append(instance_name);
+					$(menudish_instance).append(instance_cost);
+					this.menuDish_list.append(menudish_instance);
+
+					this.dishesList.append(dish_instance);
+					$(dish_instance).append(dish_instance_img);
+					$(dish_instance).append(dish_instance_name);
+					$(dish_instance).append(dish_instance_desc);
+
+				}
+				// Set total price of my Menu
+				this.myMenu_totalprice.text(model.getTotalMenuPrice());
 				break;
 			default:
 

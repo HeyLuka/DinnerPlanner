@@ -312,15 +312,15 @@
 
 		// function for starting new menu
 		function quick_start() {
-      $("#start-wizard").hide();
+			$("#start-wizard").hide();
 			var myDinnerBar = new MyDinnerBar($("#displayField"));
-      var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
+			var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
 		}
 
-    showDetail = function(){
-      var id = $(this).attr("key");
-  		var detailedDish = new DetailedDish($("#displayField"), id);
-  	}
+		showDetail = function(){
+			var id = $(this).attr("key");
+			var detailedDish = new DetailedDish($("#displayField"), id);
+		}
 
 	</script>
 
