@@ -16,6 +16,9 @@ var PrintRecipe = function(container) {
 
 	this.goBack_editDinner2 = container.find("#goBack-editDinner2");
 
+	this.numberofGuests3 = container.find("#numberofGuests3");
+	this.numberofGuests3.text(model.numberOfGuests); 
+
 	this.printoutMenu_info = container.find("#printoutMenu-info");
 	for(var key in model.menu){
 		var dish_instance = document.createElement('div');

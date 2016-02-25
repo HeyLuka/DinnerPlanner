@@ -112,7 +112,7 @@ var DinnerModel = function() {
 	  for(key in this.menu){
       if(this.menu[key] == id){
         this.menu.splice(key,1);
-        window.alert("item deleted successfully!")
+        //window.alert("item deleted successfully!")
         break;
       }
     }
