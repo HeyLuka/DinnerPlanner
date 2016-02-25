@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 
   </head>
-  <body>
+  <body style="background-image: url(images/bgImage.jpg); background-size: 100%; background-attachment: fixed; height: 100%;">
   <!--
 	<div class="container">
 		<h1>Dinner planner</h1>
@@ -25,78 +25,81 @@
 		</div>
 	</div>
 	-->
-	<div id="navigationBar" class="container">
-		<h1 id="main-header" onclick="back_to_home()">HOMELETTE</h1>
-		<h4 id="sub-header">From the best chefs in the world directly into your kitchen</h4>
-	</div>
 
-	<div id="displayField" class="container">
-		<div id="main-content" class="row">
+	<div style="background-color: #FFF; height: 100%; opacity: 0.85;">
+
+		<div id="navigationBar" class="container">
+			<h1 id="main-header" onclick="back_to_home()">HOMELETTE</h1>
+			<h4 id="sub-header">From the best chefs in the world directly into your kitchen</h4>
+		</div>
+
+		<div id="displayField" class="container">
+			<div id="main-content" class="row">
 		<!--
 			<div id="startWizard">
 				blabla
 			</div>
 		-->
-			<div id="myDinner-bar" class="col-xs-3">
-				<h4 id="dinnerBar-title">My Dinner</h4>
-				<div id="numberOfGuests-panel">
-					<p>Number of guests: <span id="numberOfGuests"></span></p>
-					<div id="numberOfGuests-function">
-						<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
-						<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
-					</div>
-				</div>
-
-				<div id="dinnerDishes-panel">
-					<table id="dinnerDishes-list" class="table table-striped">
-						<thead>
-							<tr>
-								<th>Dish Name</th>
-								<th>Cost</th>
-								<th>button</th>
-							</tr>
-						</thead>
-						<tbody id="menuDishes-list">
-
-						</tbody>
-						<tbody id="menu-pending">
-							<tr id="default-menu-row">
-								<td>Pending</td>
-								<td>0.00</td>
-								<td></td>
-							</tr>
-							<tr id="myMenu-display"></tr>
-						</tbody>
-					</table>
-					<div id="myDinner-price" style="text-align: right">SEK<span id="detailed-price">0.00</span></div>
-					<div>
-						<button id="confirm-myDinner" class="btn btn-primary" onclick="go_to_dinnerConfirm()">Confirm Dinner</button>
-					</div>
+		<div id="myDinner-bar" class="col-xs-3">
+			<h4 id="dinnerBar-title">My Dinner</h4>
+			<div id="numberOfGuests-panel">
+				<p>Number of guests: <span id="numberOfGuests"></span></p>
+				<div id="numberOfGuests-function">
+					<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+					<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
 				</div>
 			</div>
 
-			<div id="selectDish-panel" class="col-xs-9">
-				<div id="selectDish-filter">
-					<h4>SELECT DISH</h4>
-					<div id="filter-bar">
-						<form class="form-inline col-xs-5">
-							<div class="form-group">
-								<input type="text" class="form-control" id="dish-keyword" placeholder="Enter key words" />
-							</div>
+			<div id="dinnerDishes-panel">
+				<table id="dinnerDishes-list" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Dish Name</th>
+							<th>Cost</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="menuDishes-list">
 
-							<select id="dish-type" class="form-control">
-                <option value="all">All</option>
-								<option value="starter">Starter</option>
-								<option value="main dish">Main Dish</option>
-                <option value="dessert">Dessert</option>
-							</select>
-						</form>
-            <div class="col-xs-7">
-              <button id="search" class="btn btn-default col-xs-5">Search</button>
-            </div>
+					</tbody>
+					<tbody id="menu-pending">
+						<tr id="default-menu-row">
+							<td>Pending</td>
+							<td>0.00</td>
+							<td></td>
+						</tr>
+						<tr id="myMenu-display"></tr>
+					</tbody>
+				</table>
+				<div id="myDinner-price" style="text-align: right">SEK<span id="detailed-price">0.00</span></div>
+				<div>
+					<button id="confirm-myDinner" class="btn btn-primary" onclick="go_to_dinnerConfirm()">Confirm Dinner</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="selectDish-panel" class="col-xs-9">
+			<div id="selectDish-filter">
+				<h4>SELECT DISH</h4>
+				<div id="filter-bar">
+					<form class="form-inline col-xs-5">
+						<div class="form-group">
+							<input type="text" class="form-control" id="dish-keyword" placeholder="Enter key words" />
+						</div>
+
+						<select id="dish-type" class="form-control">
+							<option value="all">All</option>
+							<option value="starter">Starter</option>
+							<option value="main dish">Main Dish</option>
+							<option value="dessert">Dessert</option>
+						</select>
+					</form>
+					<div class="col-xs-7">
+						<button id="search" class="btn btn-default col-xs-5">Search</button>
 					</div>
 				</div>
-				<div id="dishesList" class="marketing">
+			</div>
+			<div id="dishesList" class="marketing">
 				<!--
 					<div id="dish-example" class="col-xs-4" style="margin-top: 20px; text-align: center">
 						<img src="images/bakedbrie.jpg" class="img-circle" alt="Dish-example, bakedbrie" width="100" height="100">
@@ -104,11 +107,11 @@
 						<p>Brief description about the example dish.</p>
 					</div>
 				-->
-				</div>
 			</div>
+		</div>
 
-			<div id="dishInfo-panel" class="col-xs-9">
-				<div id="dish-description" class="col-xs-5">
+		<div id="dishInfo-panel" class="col-xs-9">
+			<div id="dish-description" class="col-xs-5">
 				<!--
 					<h3>LASAGNE</h3>
 					<img src="images/bakedbrie.jpg" alt="Dish-example, bakedbrie">
@@ -117,20 +120,20 @@
 						<button class="btn btn-primary">back to Select Dish</button>
 					</div>
 				-->
-				</div>
+			</div>
 
-				<div id="dish-ingredient" class="col-xs-7">
-					<table id="dish-ingredient-table" class="table table-hover table-striped">
-						<caption>INGREDIENTS FOR 4 PEOPLE</caption>
-						<thead>
-							<tr>
-								<th>Amount</th>
-								<th>Name</th>
-								<th>Currency</th>
-								<th>Cost</th>
-							</tr>
-						</thead>
-						<tbody id="dish-ingredient-tbody">
+			<div id="dish-ingredient" class="col-xs-7">
+				<table id="dish-ingredient-table" class="table table-hover table-striped">
+					<caption>INGREDIENTS FOR 4 PEOPLE</caption>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Name</th>
+							<th>Currency</th>
+							<th>Cost</th>
+						</tr>
+					</thead>
+					<tbody id="dish-ingredient-tbody">
 						<!--
 							<tr>
 								<td>2tbsp</td>
@@ -145,70 +148,70 @@
 								<td>10.00</td>
 							</tr>
 						-->
-						</tbody>
-						<tfoot>
-							<tr>
-								<td><b>Total</b></td>
-								<td></td>
-								<td>SEK</td>
-								<td>10.00</td>
-							</tr>
-							<tr>
-								<td colspan="2"></td>
-								<td colspan="2">
-									<button id="confirm-dish" class="btn btn-primary">Confirm Dish</button>
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
-
-				<div id="dish-preparation" class="col-xs-12">
-					<h3>PREPARATION</h3>
-					<div id="preparation-list">
-						<ol class="list-group">
-							<li class="list-group-item">Open the refrigerator</li>
-							<li class="list-group-item">Put the elephant into the fridge</li>
-							<li class="list-group-item">Close the door of the refridgerator</li>
-						</ol>
-					</div>
-				</div>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td><b>Total</b></td>
+							<td></td>
+							<td>SEK</td>
+							<td>10.00</td>
+						</tr>
+						<tr>
+							<td colspan="2"></td>
+							<td colspan="2">
+								<button id="confirm-dish" class="btn btn-primary">Confirm Dish</button>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
 			</div>
 
-			<div id="confirmDinner-page">
-				<div class="col-xs-12" style="padding:40px">
-          <div class="col-xs-10">
-            <h4>My Dinner:</h4>
-            <p>Number of guests: <span id="numberofGuests2"></span></p>
-          </div>
-
-					<button id="goBack-editDinner" class="btn btn-primary">Go back and edit dinner</button>
-				</div>
-
-				<div id="myMenu-detail" class="col-xs-9">
-				</div>
-
-				<div id="myMenu-totalCost" class="col-xs-3">
-					<span class="bg-info col-xs-3">Total:</span>
-			        <span id="myMenu-total-cost" class="col-xs-9"></span>
-				</div>
-
-				<div id="printMenu-button">
-					<div class="col-xs-5"></div>
-					<button class="btn btn-primary col-xs-2" onclick="go_to_printRecipe()">Print Full Recipe</button>
-					<div class="col-xs-5"></div>
+			<div id="dish-preparation" class="col-xs-12">
+				<h3>PREPARATION</h3>
+				<div id="preparation-list">
+					<ol class="list-group">
+						<li class="list-group-item">Open the refrigerator</li>
+						<li class="list-group-item">Put the elephant into the fridge</li>
+						<li class="list-group-item">Close the door of the refridgerator</li>
+					</ol>
 				</div>
 			</div>
+		</div>
 
-			<div id="printoutMenu-page">
-				<div class="col-xs-12">
-          <div class="col-xs-10">
-            <h4>My Dinner:</h4>
-            <p>Number of guests: <span id="numberofGuests3"></span></p>
-          </div>
-					<button id="goBack-editDinner2" class="btn btn-primary">Go back and edit dinner</button>
+		<div id="confirmDinner-page">
+			<div class="col-xs-12" style="padding:40px">
+				<div class="col-xs-10">
+					<h4>My Dinner:</h4>
+					<p>Number of guests: <span id="numberofGuests2"></span></p>
 				</div>
-				<div id="printoutMenu-info" class="col-xs-12">
+
+				<button id="goBack-editDinner" class="btn btn-primary">Go back and edit dinner</button>
+			</div>
+
+			<div id="myMenu-detail" class="col-xs-9">
+			</div>
+
+			<div id="myMenu-totalCost" class="col-xs-3">
+				<span class="bg-info col-xs-3">Total:</span>
+				<span id="myMenu-total-cost" class="col-xs-9"></span>
+			</div>
+
+			<div id="printMenu-button">
+				<div class="col-xs-5"></div>
+				<button class="btn btn-primary col-xs-2" onclick="go_to_printRecipe()">Print Full Recipe</button>
+				<div class="col-xs-5"></div>
+			</div>
+		</div>
+
+		<div id="printoutMenu-page">
+			<div class="col-xs-12">
+				<div class="col-xs-10">
+					<h4>My Dinner:</h4>
+					<p>Number of guests: <span id="numberofGuests3"></span></p>
+				</div>
+				<button id="goBack-editDinner2" class="btn btn-primary">Go back and edit dinner</button>
+			</div>
+			<div id="printoutMenu-info" class="col-xs-12">
           <!--
 					<div id="printoutMenu-example" class="col-xs-12">
 						<div id="printoutDish-img" class="col-xs-2">
@@ -236,12 +239,12 @@
 							<p class="bg-info">Lorem ipsum dolor sit amet, consecteur</p>
 						</div>
 					</div>
-          -->
-					<!-- <div class="col-xs-1"></div> -->
-				</div>
+				-->
+				<!-- <div class="col-xs-1"></div> -->
 			</div>
-
 		</div>
+
+	</div>
 
 		<!-- this is codes for constructing the wizards
 		<div id="start-wizard">
@@ -249,19 +252,19 @@
 			<p id="wizard-description"></p>
 			<button id="initialize-button"></button>
 		</div>
-		-->
+	-->
 
-		<!-- this is codes for constructing my-dinners menu. -->
+	<!-- this is codes for constructing my-dinners menu. -->
 
-		<!-- this is codes for constructing filter for dishes. -->
-		<!-- this is codes for constructing list for available dishes options. -->
-		<!-- this is codes for constructing detailed dish information. -->
-		<!-- this is codes for constructing ingredients information for a certain dish. -->
-		<!-- this is codes for constructing the confirmation information for the dinner plan. -->
+	<!-- this is codes for constructing filter for dishes. -->
+	<!-- this is codes for constructing list for available dishes options. -->
+	<!-- this is codes for constructing detailed dish information. -->
+	<!-- this is codes for constructing ingredients information for a certain dish. -->
+	<!-- this is codes for constructing the confirmation information for the dinner plan. -->
 
 
-	</div>
-
+</div>
+</div>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
