@@ -18,8 +18,10 @@ var ConfirmDinner = function(container) {
 	this.myMenu_detail = container.find("#myMenu-detail");
 	this.myMenu_detail.empty();
 
+	this.goBack_editDinner = container.find("#goBack-editDinner");
 
-	for(key in model.menu) {
+
+	for(var key in model.menu) {
 		var dish_instance = document.createElement('div');
 		$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
 		$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
@@ -48,4 +50,12 @@ var ConfirmDinner = function(container) {
 		this.myMenu_total_cost.html(totalMenuPrice+' Sek');
 
 	}
+}
+
+var ConfirmDinnerController = function(view, model){
+	view.goBack_editDinner.click(function(){
+		$("#myDinner-bar").show();
+		$("#selectDish-panel").show();
+		$("#confirmDinner-page").hide();
+	});
 }

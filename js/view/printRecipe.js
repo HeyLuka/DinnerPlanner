@@ -14,8 +14,10 @@ var PrintRecipe = function(container) {
 	this.printoutMenu_page.show();
 	// this.printoutMenu_page.empty();
 
+	this.goBack_editDinner2 = container.find("#goBack-editDinner2");
+
 	this.printoutMenu_info = container.find("#printoutMenu-info");
-	for(key in model.menu){
+	for(var key in model.menu){
 		var dish_instance = document.createElement('div');
 		$(dish_instance).attr({"class": "col-xs-12", "id": "printoutMenu-example"});
 		var dish_instance_img_div = document.createElement('div');
@@ -51,6 +53,13 @@ var PrintRecipe = function(container) {
 
 		this.printoutMenu_info.append(dish_instance);
 
-
 	}
+}
+
+var PrintRecipeController = function(view, model){
+	view.goBack_editDinner2.click(function(){
+		$("#myDinner-bar").show();
+		$("#selectDish-panel").show();
+		$("#printoutMenu-page").hide();
+	});
 }

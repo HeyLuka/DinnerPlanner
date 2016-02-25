@@ -68,7 +68,7 @@
 					</table>
 					<div id="myDinner-price" style="text-align: right">SEK<span id="detailed-price">0.00</span></div>
 					<div>
-						<button id="confirm-myDinner" class="btn btn-primary" onclick="go_to_dinnerConfirm();">Confirm Dinner</button>
+						<button id="confirm-myDinner" class="btn btn-primary" onclick="go_to_dinnerConfirm()">Confirm Dinner</button>
 					</div>
 				</div>
 			</div>
@@ -171,7 +171,7 @@
 			<div id="confirmDinner-page">
 				<div class="col-xs-12" style="padding:40px">
 					<h4 class="col-xs-10">My Dinner:</h4>
-					<button class="btn btn-primary" onclick="back_to_myDinnerBar()">Go back and edit dinner</button>
+					<button id="goBack-editDinner" class="btn btn-primary">Go back and edit dinner</button>
 				</div>
 
 				<div id="myMenu-detail" class="col-xs-9">
@@ -192,7 +192,7 @@
 			<div id="printoutMenu-page">
 				<div class="col-xs-12">
 					<h4 class="col-xs-10">My Dinner:</h4>
-					<button class="btn btn-primary" onclick="back_to_myDinnerBar()">Go back and edit dinner</button>
+					<button id="goBack-editDinner2" class="btn btn-primary">Go back and edit dinner</button>
 				</div>
 				<div id="printoutMenu-info" class="col-xs-12">
           <!--
@@ -262,43 +262,19 @@
 	<script src="js/view/detailedDish.js"></script>
 	<script src="js/view/confirmDinner.js"></script>
 	<script src="js/view/printRecipe.js"></script>
-	<!--
-	<script src="js/view/exampleView.js"></script>
-	<script src="js/view/exampleViewController.js"></script>
-	-->
 
 	<!-- The application event functions -->
 	<script type="text/javascript">
-		/*function decreaseGuest() {
-			model.setNumberOfGuests(model.getNumberOfGuests()-1);
-			// model.numberOfGuests = 5;
-			// model.numberOfGuests -= 1;
-			myDinnerBar = new MyDinnerBar($("#displayField"));
-		}
 
-		function increaseGuest() {
-			model.setNumberOfGuests(model.getNumberOfGuests()+1);
-			// model.numberOfGuests = 5;
-			// model.numberOfGuests -= 1;
-			myDinnerBar = new MyDinnerBar($("#displayField"));
-		}*/
+    function go_to_dinnerConfirm() {
+			var confirmDinner = new ConfirmDinner($("#displayField"));
+      var confirmDinnerController = new ConfirmDinnerController(confirmDinner, model);
+    }
 
-    	/*function back_to_myDinnerBar(){
-	    	myDinnerBar = new MyDinnerBar($("#displayField"));
-	    }*/
-
-	    function append_to_myDinnerBar() {
-	    	model.menu.push(1);
-	    	myDinnerBar = new MyDinnerBar($("#displayField"));
-	    }
-
-	    function go_to_dinnerConfirm() {
-			confirmDinner = new ConfirmDinner($("#displayField"));
-	    }
-
-	    function go_to_printRecipe(){
-	    	printRecipe = new PrintRecipe($("#displayField"));
-	    }
+    function go_to_printRecipe(){
+    	var printRecipe = new PrintRecipe($("#displayField"));
+      var printRecipeController = new PrintRecipeController(printRecipe, model);
+    }
 	</script>
 
 	<!-- The function for navigation bar in the top -->
