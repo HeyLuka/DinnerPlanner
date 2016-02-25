@@ -41,6 +41,8 @@ var MyDinnerBar = function(container) {
 	this.plusGuest = container.find("#plusGuest");
 	this.minusGuest = container.find("#minusGuest");
 
+	this.search = container.find("#search");
+
 	// // Insert data to my Menu
 	// for(var menu_key in model.menu) {
 	// 	var menudish_instance = document.createElement('tr');
@@ -86,7 +88,7 @@ var MyDinnerBar = function(container) {
 		var dish_instance_name = document.createElement('h3');
 		$(dish_instance_name).text(model.getDish(model.dishes[key].id)["name"]);
 		var dish_instance_desc = document.createElement('p');
-		$(dish_instance_desc).attr("style", "text-align: left")
+		$(dish_instance_desc).attr("style", "text-align: left");
 		// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
 		var temp_string = model.getDish(model.dishes[key].id)["description"];
 		if(temp_string.length > 120){
@@ -146,4 +148,45 @@ var MyDinnerBarController = function(view, model){
 		model.notifyObservers("changeNumberofGuests");
 	});
 
+	view.search.click(function(){
+		var filter = $("#dish-keyword").val();
+		//alert(filter);
+		var type = $("#dish-type").val();
+		var dishesFiltered = model.getAllDishes(type, filter);
+		$("#dishesList").empty();
+		$("#dishesList").show();
+
+		for(var key_new = 0; key_new < dishesFiltered.length; key_new ++) {
+			var dish_instance = document.createElement('div');
+			$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
+			$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
+			var dish_instance_img = document.createElement('img');
+			$(dish_instance_img).attr({"src": "images/"+dishesFiltered[key_new]["image"]});
+			$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
+			$(dish_instance_img).attr("key", dishesFiltered[key_new].id);
+			/*$(dish_instance_img).click(function(){
+	      //var id = $(this).attr(width);
+				alert(1);
+	  		//var detailedDish = new DetailedDish($("#displayField"), id);
+	  	});*/
+			$(dish_instance_img).click(showDetail);
+			//$(dish_instance_img).attr("onclick", '(function(){var id = this.attr("key");var detailedDish = new DetailedDish($("#displayField"), id);})()');
+			//$(dish_instance_img).click((function(){var detailedDish = new DetailedDish($("#displayField"), 2))());
+			var dish_instance_name = document.createElement('h3');
+			$(dish_instance_name).text(dishesFiltered[key_new]["name"]);
+			var dish_instance_desc = document.createElement('p');
+			$(dish_instance_desc).attr("style", "text-align: left");
+			// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
+			var temp_string = dishesFiltered[key_new]["description"];
+			if(temp_string.length > 120){
+				temp_string = temp_string.substring(0,120)+"...";
+			}
+			$(dish_instance_desc).text(temp_string);
+
+			$("#dishesList").append(dish_instance);
+			$(dish_instance).append(dish_instance_img);
+			$(dish_instance).append(dish_instance_name);
+			$(dish_instance).append(dish_instance_desc);
+		}
+	});
 }

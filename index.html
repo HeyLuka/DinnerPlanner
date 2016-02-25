@@ -77,16 +77,19 @@
 				<div id="selectDish-filter">
 					<h4>SELECT DISH</h4>
 					<div id="filter-bar">
-						<form class="form-inline">
+						<form class="form-inline col-xs-5">
 							<div class="form-group">
 								<input type="text" class="form-control" id="dish-keyword" placeholder="Enter key words" />
 							</div>
-							<button type="submit" class="btn btn-default">Search</button>
-							<select class="form-control">
-								<option>Main</option>
-								<option>Drinks</option>
+
+							<select id="dish-type" class="form-control">
+                <option value="all">All</option>
+								<option value="starter">Starter</option>
+								<option value="main dish">Main Dish</option>
+                <option value="dessert">Dessert</option>
 							</select>
 						</form>
+            <button id="search" class="btn btn-default col-xs-7">Search</button>
 					</div>
 				</div>
 				<div id="dishesList" class="marketing">
