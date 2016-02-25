@@ -53,6 +53,7 @@
 							<tr>
 								<th>Dish Name</th>
 								<th>Cost</th>
+								<th>button</th>
 							</tr>
 						</thead>
 						<tbody id="menuDishes-list">
@@ -62,6 +63,7 @@
 							<tr id="default-menu-row">
 								<td>Pending</td>
 								<td>0.00</td>
+								<td></td>
 							</tr>
 							<tr id="myMenu-display"></tr>
 						</tbody>
@@ -278,15 +280,15 @@
 	<!-- The application event functions -->
 	<script type="text/javascript">
 
-    function go_to_dinnerConfirm() {
+		function go_to_dinnerConfirm() {
 			var confirmDinner = new ConfirmDinner($("#displayField"));
-      var confirmDinnerController = new ConfirmDinnerController(confirmDinner, model);
-    }
+			var confirmDinnerController = new ConfirmDinnerController(confirmDinner, model);
+		}
 
-    function go_to_printRecipe(){
-    	var printRecipe = new PrintRecipe($("#displayField"));
-      var printRecipeController = new PrintRecipeController(printRecipe, model);
-    }
+		function go_to_printRecipe(){
+			var printRecipe = new PrintRecipe($("#displayField"));
+			var printRecipeController = new PrintRecipeController(printRecipe, model);
+		}
 	</script>
 
 	<!-- The function for navigation bar in the top -->
@@ -299,16 +301,24 @@
 
 		// function for starting new menu
 		function quick_start() {
-      $("#start-wizard").hide();
+			$("#start-wizard").hide();
 			var myDinnerBar = new MyDinnerBar($("#displayField"));
-      var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
+			var myDinnerBarController = new MyDinnerBarController(myDinnerBar, model);
 		}
 
-    showDetail = function(){
-      var id = $(this).attr("key");
-  		var detailedDish = new DetailedDish($("#displayField"), id);
-      var detailedDishController = new DetailedDishController(detailedDish, model);
-  	}
+		showDetail = function(){
+			var id = $(this).attr("key");
+			var detailedDish = new DetailedDish($("#displayField"), id);
+			var detailedDishController = new DetailedDishController(detailedDish, model);
+		}
+
+		removeDish = function(){
+			var id = $(this).attr("key");
+			var updateMenuController = new UpdateMenuController(id, model);
+			// model.removeDishFromMenu(id);
+			// model.norifyObservers("updateMyMenu");
+			console.log(id);
+		}
 
 	</script>
 

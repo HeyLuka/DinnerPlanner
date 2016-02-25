@@ -116,14 +116,25 @@ var MyDinnerBar = function(container) {
 				// Insert data to my Menu
 				this.menuDish_list.empty();
 				for(var menu_key in model.menu) {
+					var dish_id = model.getDish(model.menu[menu_key]).id;
 					var menudish_instance = document.createElement('tr');
 					var instance_name = document.createElement('td');
 					$(instance_name).text(model.getDish(model.menu[menu_key]).name);
 					var instance_cost = document.createElement('td');
 					$(instance_cost).text(model.getDishPrice(model.menu[menu_key]));
+					var td_remove_button = document.createElement('td');
+					var remove_button = document.createElement('button');
+					$(remove_button).attr({"class": "btn btn-default btn-sm r_button"})
+					$(remove_button).click(removeDish);
+					var button_content = document.createElement('span');
+					$(button_content).attr({"class": "glyphicon glyphicon-remove"});
+					$(remove_button).attr("key", dish_id);
+					$(remove_button).append(button_content);
+					$(td_remove_button).append(remove_button);
 
 					$(menudish_instance).append(instance_name);
 					$(menudish_instance).append(instance_cost);
+					$(menudish_instance).append(td_remove_button);
 					this.menuDish_list.append(menudish_instance);
 
 
@@ -136,6 +147,11 @@ var MyDinnerBar = function(container) {
 		}
 	}
 
+}
+
+var UpdateMenuController = function(id, model){
+	model.removeDishFromMenu(id);
+	model.notifyObservers("updateMyMenu")
 }
 
 var MyDinnerBarController = function(view, model){
