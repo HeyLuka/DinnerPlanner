@@ -8,6 +8,11 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <style type="text/css">
+      .col-xs-4 {border: 2px dotted #F0FFFF; padding: 8px; background-color: rgba(240, 255, 255, 0.5);margin-right: 8px;width: 32.3%}
+      .printout-menu-example {border: 2px dotted #F0FFFF; padding: 8px; background-color: rgba(240, 255, 255, 0.5); margin-bottom: 10px;}
+      #printout-menu-button{margin-top: 15px}
+    </style>
 
   </head>
   <body style="background-image: url(images/bgImage.jpg); background-size: 100%; background-attachment: fixed; height: 100%;">
@@ -26,7 +31,7 @@
 	</div>
 	-->
 
-	<div style="background-color: rgba(255 ,255 , 255, 0.7); padding-bottom: 25px">
+	<div style="background-color: rgba(255 ,255 , 255, 0.6); padding-bottom: 25px">
 
 		<div id="navigationBar" class="container">
 			<h1 id="main-header" onclick="back_to_home()">HOMELETTE</h1>
@@ -198,7 +203,7 @@
 
 			<div id="printMenu-button">
 				<div class="col-xs-5"></div>
-				<button class="btn btn-primary col-xs-2" onclick="go_to_printRecipe()">Print Full Recipe</button>
+				  <button id="printout-menu-button" class="btn btn-primary col-xs-2" onclick="go_to_printRecipe()">Print Full Recipe</button>
 				<div class="col-xs-5"></div>
 			</div>
 		</div>

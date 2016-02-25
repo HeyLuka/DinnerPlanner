@@ -17,12 +17,13 @@ var PrintRecipe = function(container) {
 	this.goBack_editDinner2 = container.find("#goBack-editDinner2");
 
 	this.numberofGuests3 = container.find("#numberofGuests3");
-	this.numberofGuests3.text(model.numberOfGuests); 
+	this.numberofGuests3.text(model.numberOfGuests);
 
 	this.printoutMenu_info = container.find("#printoutMenu-info");
+	this.printoutMenu_info.empty();
 	for(var key in model.menu){
 		var dish_instance = document.createElement('div');
-		$(dish_instance).attr({"class": "col-xs-12", "id": "printoutMenu-example"});
+		$(dish_instance).attr({"class": "col-xs-12 printout-menu-example", "id": "printoutMenu-example"});
 		var dish_instance_img_div = document.createElement('div');
 		$(dish_instance_img_div).attr({"class": "col-xs-2"});
 		var dish_instance_img = document.createElement('img');
