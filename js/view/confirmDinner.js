@@ -20,6 +20,8 @@ var ConfirmDinner = function(container) {
 
 	this.goBack_editDinner = container.find("#goBack-editDinner");
 
+	this.numberofGuests2 = container.find("#numberofGuests2");
+	this.numberofGuests2.text(model.numberOfGuests);
 
 	for(var key in model.menu) {
 		var dish_instance = document.createElement('div');
@@ -50,6 +52,7 @@ var ConfirmDinner = function(container) {
 		this.myMenu_total_cost.html(totalMenuPrice+' Sek');
 
 	}
+
 }
 
 var ConfirmDinnerController = function(view, model){
