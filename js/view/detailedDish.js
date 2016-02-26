@@ -29,10 +29,18 @@ var DetailedDish = function(container, id) {
 
 	this.dish_description = container.find("#dish-description");
 	this.dish_ingredient_table_tbody = container.find("#dish-ingredient-tbody");
+	this.dish_ingredient_table_tfoot = container.find("#dish-ingredient-tfoot");
 	this.dish_preparation = container.find("#dish-preparation");
+
+	this.pending_price = container.find("#pending-menu-price");
+	this.pending_row = container.find("#pending-menu-row");
+
+	this.detailed_price = container.find("#detailed-price");
+
 
 	this.dish_description.empty();
 	this.dish_ingredient_table_tbody.empty();
+	// this.dish_ingredient_table_tfoot.empty();
 
 	var dish_desc_title = document.createElement('h3');
 	var dish_id = id;
@@ -54,11 +62,13 @@ var DetailedDish = function(container, id) {
 		var instance_name = document.createElement('td');
 		$(instance_name).text(model.getDish(dish_id).ingredients[index].name);
 		var instance_amount = document.createElement('td');
-		$(instance_amount).html(model.getDish(dish_id).ingredients[index].quantity + " " + model.getDish(dish_id).ingredients[index].unit);
+		$(instance_amount).attr("class", "instance_amount");
+		$(instance_amount).html(model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests/4.0 + " " + model.getDish(dish_id).ingredients[index].unit);
 		var instance_currency = document.createElement('td');
 		$(instance_currency).html('<td>SEK</td>');
 		var instance_price = document.createElement('td');
-	 	$(instance_price).html(model.getDish(dish_id).ingredients[index].price);
+		$(instance_price).attr("class", "instance_price");
+	 	$(instance_price).html(model.getDish(dish_id).ingredients[index].price*model.numberOfGuests/4.0);
 
 		$(dish_inge_instance).append(instance_amount);
 		$(dish_inge_instance).append(instance_name);
@@ -66,6 +76,49 @@ var DetailedDish = function(container, id) {
 		$(dish_inge_instance).append(instance_price);
 
 		this.dish_ingredient_table_tbody.append(dish_inge_instance);
+	}
+
+	var total_price = document.createElement('tr');
+	var total_price_title = document.createElement('td');
+	$(total_price_title).html('<b>Total: </b>');
+	$(total_price_title).attr("colspan", 2);
+	var total_price_unit = document.createElement('td');
+	$(total_price_unit).html("SEK");
+	var total_price_amount = document.createElement('td');
+	$(total_price_amount).attr("class", "instance_total_price");
+	$(total_price_amount).html(model.getDishPrice(dish_id));
+	$(total_price).append(total_price_title);
+	$(total_price).append(total_price_amount);
+	$(total_price).append(total_price_unit);
+	this.dish_ingredient_table_tbody.append(total_price);
+
+	this.pending_price.html(model.getDishPrice(dish_id));
+	this.pending_row.addClass("info");
+
+	this.detailed_price.html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
+
+
+	model.addObserver(this);
+
+	this.update = function(argv){
+		switch (argv) {
+			case "changeNumberofGuests":
+				for(var key=0; key<$(".instance_amount").length; key++){
+					// $(".instance_amount")[key].html(instance_amount)*model.numberOfGuests/4.0;
+					$(".instance_amount")[key].innerHTML = model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests/4.0 + " " + model.getDish(dish_id).ingredients[key].unit;
+					$(".instance_price")[key].innerHTML = model.getDish(dish_id).ingredients[key].price*model.numberOfGuests/4.0;
+				}	
+				$(".instance_total_price")[0].innerHTML = model.getDishPrice(dish_id);
+				var current_pending_price = $("#pending-menu-price").html();
+				if (current_pending_price!=0){
+					$("#pending-menu-price").html(model.getDishPrice(dish_id));
+					$("#detailed-price").html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
+				}
+				else{
+					$("#detailed-price").html(model.getTotalMenuPrice());
+				}
+			}
+
 	}
 
 	// show preparation steps related with this dish
@@ -79,6 +132,8 @@ var DetailedDishController = function(view, model){
 		model.addDishToMenu(view.dishInfo_panel.key);
 		model.notifyObservers("updateMyMenu");*/
 		//alert("haha");
+		$("#pending-menu-row").removeClass("info");
+		$("#pending-menu-price").html(0.00);
 		$("#selectDish-panel").show();
 		model.addDishToMenu($("#dishInfo-panel").attr("key"))
 		model.notifyObservers("updateMyMenu");
