@@ -43,7 +43,7 @@ var DinnerModel = function() {
 	this.getSelectedDish = function(type) {
 		//TODO Lab 2
     var selectDishMenu = [];
-    for(key in this.menu){
+    for(var key in this.menu){
       if(this.dishes[this.menu[key]].type == type){
         selectDishMenu.push(this.getDish(this.menu[key]));
       }
@@ -55,7 +55,7 @@ var DinnerModel = function() {
 	this.getFullMenu = function() {
 		//TODO Lab 2
     var menuDishes = [];
-    for(key in this.menu){
+    for(var key in this.menu){
       menuDishes.push(this.getDish(this.menu[key]));
     }
     return menuDishes;
@@ -65,7 +65,7 @@ var DinnerModel = function() {
 	this.getAllIngredients = function() {
 		//TODO Lab 2
     var allIngredients = [];
-    for(key in this.menu){
+    for(var key in this.menu){
       allIngredients = allIngredients.concat(this.getDish(this.menu[key]).ingredients);
     }
     return allIngredients;
@@ -75,7 +75,7 @@ var DinnerModel = function() {
 	this.getDishPrice = function(id){
 		var dishPrice = 0;
 		var ingredients = this.getDish(id).ingredients;
-		for(key in ingredients){
+		for(var key in ingredients){
 			dishPrice += ingredients[key].price;
 		}
 		return dishPrice*this.numberOfGuests/4.0;
@@ -84,7 +84,7 @@ var DinnerModel = function() {
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
 		var totalMenuPrice = 0;
-		for(key in this.menu){
+		for(var key in this.menu){
 			totalMenuPrice += this.getDishPrice(this.menu[key]);
 		}
     return totalMenuPrice;
@@ -94,12 +94,20 @@ var DinnerModel = function() {
 	//it is removed from the this.menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2
-    for(key in this.menu){
+    for(var key in this.menu){
       if(this.menu[key] == id){
         return;
       }
     }
-		for(key in this.dishes){
+
+		for(var key in this.menu){
+			if(this.getDish(this.menu[key]).type == this.getDish(id).type){
+				this.removeDishFromMenu(this.menu[key]);
+				break;
+			}
+		}
+
+		for(var key in this.dishes){
       if(this.dishes[key].id == id){
         this.menu.push(id);
       }
@@ -109,7 +117,7 @@ var DinnerModel = function() {
 	//Removes dish from this.menu
 	this.removeDishFromMenu = function(id) {
 		//TODO Lab 2
-	  for(key in this.menu){
+	  for(var key in this.menu){
       if(this.menu[key] == id){
         this.menu.splice(key,1);
         //window.alert("item deleted successfully!")
