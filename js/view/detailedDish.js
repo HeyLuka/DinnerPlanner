@@ -58,7 +58,7 @@ var DetailedDish = function(container, id) {
 	this.dish_description.append(dish_desc_words);
 
 	// show ingredients list related with this dish
-	for(index in model.getDish(dish_id).ingredients){
+	for(var index in model.getDish(dish_id).ingredients){
 		var dish_inge_instance = document.createElement('tr');
 
 
@@ -66,7 +66,15 @@ var DetailedDish = function(container, id) {
 		$(instance_name).text(model.getDish(dish_id).ingredients[index].name);
 		var instance_amount = document.createElement('td');
 		$(instance_amount).attr("class", "instance_amount");
-		$(instance_amount).html(model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests + " " + model.getDish(dish_id).ingredients[index].unit);
+		var ingredientsAmount = model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests;
+		var ingredientsAmountString = ingredientsAmount.toString();
+		var decimalIndex=ingredientsAmountString.indexOf('.');
+		if((decimalIndex == '-1') || (ingredientsAmountString.substring(decimalIndex+1,ingredientsAmountString.length).length < 5)){
+			$(instance_amount).html(ingredientsAmount);
+		}else {
+			$(instance_amount).html(innerHTML = (ingredientsAmount).toFixed(2));
+		}
+		//$(instance_amount).html(model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests + " " + model.getDish(dish_id).ingredients[index].unit);
 		var instance_currency = document.createElement('td');
 		$(instance_currency).html('<td>SEK</td>');
 		var instance_price = document.createElement('td');
