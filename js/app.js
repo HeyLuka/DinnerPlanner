@@ -13,9 +13,7 @@ $(function() {
 
 var model;
 
-var detailedDishController;
 var detailedDish;
-
 
 
 $(document).ready(function() {

@@ -129,7 +129,7 @@
 
 			<div id="dish-ingredient" class="col-xs-7">
 				<table id="dish-ingredient-table" class="table table-hover table-striped">
-					<caption>INGREDIENTS FOR 4 PEOPLE</caption>
+					<caption>INGREDIENTS FOR <span id="people-num"></span> PEOPLE</caption>
 					<thead>
 						<tr>
 							<th>Amount</th>
@@ -316,9 +316,13 @@
 
 		showDetail = function(){
 			var id = $(this).attr("key");
-			var detailedDish = new DetailedDish($("#displayField"), id);
-			// var detailedDishController = new DetailedDishController(detailedDish, model);
-			detailedDishController = new DetailedDishController(detailedDish, model);
+		      if(detailedDish){
+		        detailedDish.update = function(){};
+		      }
+
+			detailedDish = new DetailedDish($("#displayField"), id);
+			var detailedDishController = new DetailedDishController(detailedDish, model);
+// >>>>>>> 700b832fcaabd1a48cd941bcfcd91441899137fa
 		}
 
 		removeDish = function(){
