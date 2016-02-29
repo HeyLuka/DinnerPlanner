@@ -92,10 +92,29 @@ var DetailedDish = function(container, id) {
 	$(total_price).append(total_price_unit);
 	this.dish_ingredient_table_tbody.append(total_price);
 
+	// setting the pending bar at the detailed dish information page
 	this.pending_price.html(model.getDishPrice(dish_id));
 	this.pending_row.addClass("info");
 
-	this.detailed_price.html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
+	// set the temporary total price shown in the left menu bar
+	this.temporary_total_price = model.getDishPrice(dish_id) + model.getTotalMenuPrice();
+	for(var key in model.menu){
+		if(model.getDish(model.menu[key]).type == model.getDish(id).type){
+			// this.removeDishFromMenu(this.menu[key]);
+			this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+			break;
+		}
+	}
+	// this.detailed_price.html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
+	this.detailed_price.html(this.temporary_total_price);
+
+	this.current_total_price = null;
+
+	for(var key=0; key<$(".r_button").length; key++){
+		if (model.getDish(model.menu[key]).type == model.getDish(id).type){
+			$($(".r_button")[key]).parent().parent().addClass("warning");
+		}
+	}
 
 
 	model.addObserver(this);
@@ -103,6 +122,7 @@ var DetailedDish = function(container, id) {
 	this.update = function(argv){
 		switch (argv) {
 			case "changeNumberofGuests":
+				console.log("dish id is: " + dish_id);
 				for(var key=0; key<$(".instance_amount").length; key++){
 					// $(".instance_amount")[key].html(instance_amount)*model.numberOfGuests/4.0;
 					$(".instance_amount")[key].innerHTML = model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests/4.0 + " " + model.getDish(dish_id).ingredients[key].unit;
@@ -112,7 +132,27 @@ var DetailedDish = function(container, id) {
 				var current_pending_price = $("#pending-menu-price").html();
 				if (current_pending_price!=0){
 					$("#pending-menu-price").html(model.getDishPrice(dish_id));
-					$("#detailed-price").html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
+					// var current_total_price;
+					console.log("change current price.");
+					this.current_total_price = model.getTotalMenuPrice() + model.getDishPrice(dish_id);
+					for(var key=0; key<$(".r_button").length; key++){
+						if (model.getDish(model.menu[key]).type == model.getDish(id).type){
+							$($(".r_button")[key]).parent().parent().addClass("warning");
+							this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+						}
+					}
+
+
+					// for(var key in model.menu){
+					// 	if(model.getDish(model.menu[key]).type == model.getDish(id).type){
+					// 		// this.removeDishFromMenu(this.menu[key]);
+					// 		this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+					// 		// this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+					// 	break;
+					// 	}
+					// }
+					this.detailed_price.html(this.current_total_price);
+					// $("#detailed-price").html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
 				}
 				else{
 					$("#detailed-price").html(model.getTotalMenuPrice());

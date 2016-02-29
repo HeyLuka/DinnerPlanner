@@ -317,7 +317,8 @@
 		showDetail = function(){
 			var id = $(this).attr("key");
 			var detailedDish = new DetailedDish($("#displayField"), id);
-			var detailedDishController = new DetailedDishController(detailedDish, model);
+			// var detailedDishController = new DetailedDishController(detailedDish, model);
+			detailedDishController = new DetailedDishController(detailedDish, model);
 		}
 
 		removeDish = function(){

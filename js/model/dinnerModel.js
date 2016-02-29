@@ -6,6 +6,7 @@ var DinnerModel = function() {
 	this.observer = [];
 
 	this.menu = [];
+	this.pending_menu = [];
 
   	//this.numberOfGuests = 6;
 	this.numberOfGuests = 1;
@@ -90,6 +91,16 @@ var DinnerModel = function() {
     return totalMenuPrice;
 	}
 
+	// get the total price including the pending dish(after replacing the one with the same type)
+	// including a argument which represents the pending dish id
+	this.getTempMenuPrice = function(id){
+		var tempMenuPrice = 0;
+		for(var temp_key in this.pending_menu){
+			tempMenuPrice += this.getDishPrice(this.pending_menu[temp_key]);
+		}
+		return tempMenuPrice;
+	}
+
 	//Adds the passed dish to the this.menu. If the dish of that type already exists on the this.menu
 	//it is removed from the this.menu and the new one added.
 	this.addDishToMenu = function(id) {
@@ -112,6 +123,17 @@ var DinnerModel = function() {
         this.menu.push(id);
       }
     }
+	}
+
+	// virtually adds pending dish to pending menu
+	this.addDishToPendingMenu = function(id){
+		this.pending_menu = this.menu;	
+		for(var key in this.pending_menu){
+			if(this.getDish(this.menu[key]).type == this.getDish(id).type){
+				this.removeDishFromMenu(this.menu[key]);
+				break;
+			}
+		}
 	}
 
 	//Removes dish from this.menu
