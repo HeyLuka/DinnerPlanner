@@ -66,7 +66,7 @@ var DetailedDish = function(container, id) {
 		$(instance_name).text(model.getDish(dish_id).ingredients[index].name);
 		var instance_amount = document.createElement('td');
 		$(instance_amount).attr("class", "instance_amount");
-		$(instance_amount).html((model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests).toFixed(2) + " " + model.getDish(dish_id).ingredients[index].unit);
+		$(instance_amount).html(model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests + " " + model.getDish(dish_id).ingredients[index].unit);
 		var instance_currency = document.createElement('td');
 		$(instance_currency).html('<td>SEK</td>');
 		var instance_price = document.createElement('td');
@@ -128,7 +128,15 @@ var DetailedDish = function(container, id) {
 				console.log("dish id is: " + dish_id);
 				for(var key=0; key<$(".instance_amount").length; key++){
 					// $(".instance_amount")[key].html(instance_amount)*model.numberOfGuests;
-					$(".instance_amount")[key].innerHTML = (model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests).toFixed(2) + " " + model.getDish(dish_id).ingredients[key].unit;
+					var ingredientsAmount = model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests;
+					var ingredientsAmountString = ingredientsAmount.toString();
+					var decimalIndex=ingredientsAmountString.indexOf('.');
+					if((decimalIndex == '-1') || (ingredientsAmountString.substring(decimalIndex+1,ingredientsAmountString.length).length < 5)){
+						$(".instance_amount")[key].innerHTML = ingredientsAmount;
+					}else {
+						$(".instance_amount")[key].innerHTML = (ingredientsAmount).toFixed(2);
+					}
+					//$(".instance_amount")[key].innerHTML = (model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests).toFixed(2) + " " + model.getDish(dish_id).ingredients[key].unit;
 					$(".instance_price")[key].innerHTML = model.getDish(dish_id).ingredients[key].price*model.numberOfGuests;
 				}
 				$(".instance_total_price")[0].innerHTML = model.getDishPrice(dish_id);
