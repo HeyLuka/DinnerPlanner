@@ -13,6 +13,7 @@ $(function() {
 
 var model;
 
+var detailedDish;
 
 
 $(document).ready(function() {

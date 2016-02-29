@@ -42,6 +42,9 @@ var DetailedDish = function(container, id) {
 	this.dish_ingredient_table_tbody.empty();
 	// this.dish_ingredient_table_tfoot.empty();
 
+	this.people_num = container.find("#people-num");
+	this.people_num.html(model.getNumberOfGuests());
+
 	var dish_desc_title = document.createElement('h3');
 	var dish_id = id;
 	$(dish_desc_title).text(model.getDish(dish_id).name);
@@ -63,12 +66,12 @@ var DetailedDish = function(container, id) {
 		$(instance_name).text(model.getDish(dish_id).ingredients[index].name);
 		var instance_amount = document.createElement('td');
 		$(instance_amount).attr("class", "instance_amount");
-		$(instance_amount).html(model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests/4.0 + " " + model.getDish(dish_id).ingredients[index].unit);
+		$(instance_amount).html((model.getDish(dish_id).ingredients[index].quantity*model.numberOfGuests).toFixed(2) + " " + model.getDish(dish_id).ingredients[index].unit);
 		var instance_currency = document.createElement('td');
 		$(instance_currency).html('<td>SEK</td>');
 		var instance_price = document.createElement('td');
 		$(instance_price).attr("class", "instance_price");
-	 	$(instance_price).html(model.getDish(dish_id).ingredients[index].price*model.numberOfGuests/4.0);
+	 	$(instance_price).html(model.getDish(dish_id).ingredients[index].price*model.numberOfGuests);
 
 		$(dish_inge_instance).append(instance_amount);
 		$(dish_inge_instance).append(instance_name);
@@ -104,10 +107,10 @@ var DetailedDish = function(container, id) {
 		switch (argv) {
 			case "changeNumberofGuests":
 				for(var key=0; key<$(".instance_amount").length; key++){
-					// $(".instance_amount")[key].html(instance_amount)*model.numberOfGuests/4.0;
-					$(".instance_amount")[key].innerHTML = model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests/4.0 + " " + model.getDish(dish_id).ingredients[key].unit;
-					$(".instance_price")[key].innerHTML = model.getDish(dish_id).ingredients[key].price*model.numberOfGuests/4.0;
-				}	
+					// $(".instance_amount")[key].html(instance_amount)*model.numberOfGuests;
+					$(".instance_amount")[key].innerHTML = (model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests).toFixed(2) + " " + model.getDish(dish_id).ingredients[key].unit;
+					$(".instance_price")[key].innerHTML = model.getDish(dish_id).ingredients[key].price*model.numberOfGuests;
+				}
 				$(".instance_total_price")[0].innerHTML = model.getDishPrice(dish_id);
 				var current_pending_price = $("#pending-menu-price").html();
 				if (current_pending_price!=0){
@@ -118,6 +121,7 @@ var DetailedDish = function(container, id) {
 					$("#detailed-price").html(model.getTotalMenuPrice());
 				}
 			}
+			$("#people-num").html(model.getNumberOfGuests());
 
 	}
 
