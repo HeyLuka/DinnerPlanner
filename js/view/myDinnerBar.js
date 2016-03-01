@@ -41,6 +41,10 @@ var MyDinnerBar = function(container) {
 	this.plusGuest = container.find("#plusGuest");
 	this.minusGuest = container.find("#minusGuest");
 
+	// get the filter elements
+	this.dish_keyword = container.find("#dish-keyword");
+	this.dish_type = container.find("#dish-type");
+
 	this.search = container.find("#search");
 
 	// // Insert data to my Menu
@@ -113,13 +117,16 @@ var MyDinnerBar = function(container) {
 				this.numberOfGuests.text(model.numberOfGuests);
 				// Insert data to my Menu
 				this.menuDish_list.empty();
+				// Display the dynamic content in the menu
 				for(var menu_key in model.menu) {
-					var dish_id = model.getDish(model.menu[menu_key]).id;
+					// var dish_id = model.getDish(model.menu[menu_key]).id;
+					var dish_id = model.menu[menu_key];
 					var menudish_instance = document.createElement('tr');
 					var instance_name = document.createElement('td');
-					$(instance_name).text(model.getDish(model.menu[menu_key]).name);
+					$(instance_name).text(model.getDishFromMenu(model.menu[menu_key]).name);
+					console.log(model.getDishFromMenu(model.menu[menu_key]).name);
 					var instance_cost = document.createElement('td');
-					$(instance_cost).text(model.getDishPrice(model.menu[menu_key]));
+					$(instance_cost).text(model.getDishPriceFromMenu(model.menu[menu_key]));
 					var td_remove_button = document.createElement('td');
 					var remove_button = document.createElement('button');
 					$(remove_button).attr({"class": "btn btn-default btn-sm r_button"})
@@ -144,12 +151,13 @@ var MyDinnerBar = function(container) {
 				// Insert data to my Menu
 				this.menuDish_list.empty();
 				for(var menu_key in model.menu) {
-					var dish_id = model.getDish(model.menu[menu_key]).id;
+					var dish_id = model.menu[menu_key];
+					// var dish_id = model.getDish(model.menu[menu_key]).id;
 					var menudish_instance = document.createElement('tr');
 					var instance_name = document.createElement('td');
-					$(instance_name).text(model.getDish(model.menu[menu_key]).name);
+					$(instance_name).text(model.getDishFromMenu(model.menu[menu_key]).name);
 					var instance_cost = document.createElement('td');
-					$(instance_cost).text(model.getDishPrice(model.menu[menu_key]));
+					$(instance_cost).text(model.getDishPriceFromMenu(model.menu[menu_key]));
 					var td_remove_button = document.createElement('td');
 					var remove_button = document.createElement('button');
 					$(remove_button).attr({"class": "btn btn-default btn-sm r_button"})
@@ -170,6 +178,41 @@ var MyDinnerBar = function(container) {
 				// Set total price of my Menu
 				this.myMenu_totalprice.text(model.getTotalMenuPrice());
 				break;
+
+			case "filterDishList":
+				console.log("filter dish list");
+				var filteredDish = model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
+				this.dishesList.empty();
+				for(var key in filteredDish) {
+					var dish_instance = document.createElement('div');
+					$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
+					$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
+					var dish_instance_img = document.createElement('img');
+					$(dish_instance_img).attr({"src": "images/"+model.getDish(model.dishes[key].id)["image"]});
+					$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
+					$(dish_instance_img).attr("key", model.dishes[key].id);
+					$(dish_instance_img).click(showDetail);
+					//$(dish_instance_img).attr("onclick", '(function(){var id = this.attr("key");var detailedDish = new DetailedDish($("#displayField"), id);})()');
+					//$(dish_instance_img).click((function(){var detailedDish = new DetailedDish($("#displayField"), 2))());
+					var dish_instance_name = document.createElement('h3');
+					$(dish_instance_name).text(model.getDish(model.dishes[key].id)["name"]);
+					var dish_instance_desc = document.createElement('p');
+					$(dish_instance_desc).attr("style", "text-align: left");
+					// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
+					var temp_string = model.getDish(model.dishes[key].id)["description"];
+					if(temp_string.length > 120){
+						temp_string = temp_string.substring(0,120)+"...";
+					}
+					$(dish_instance_desc).text(temp_string);
+
+					this.dishesList.append(dish_instance);
+					$(dish_instance).append(dish_instance_img);
+					$(dish_instance).append(dish_instance_name);
+					$(dish_instance).append(dish_instance_desc);
+
+			}
+				break;
+
 			default:
 
 		}
@@ -190,6 +233,23 @@ var MyDinnerBarController = function(view, model){
 	view.minusGuest.click(function(){
 		model.setNumberOfGuests(model.getNumberOfGuests() - 1);
 		model.notifyObservers("changeNumberofGuests");
+	});
+
+	// view.dish_keyword.change(function(){
+	// 	// console.log("successfully change the filter content.");
+	// 	alert("successfully change content");
+	// });
+
+	view.dish_keyword.on("input", function(){
+		// console.log("dish title in the filter changed.");
+		model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
+		model.notifyObservers("filterDishList");
+	});
+
+	view.dish_type.change(function(){
+		// console.log("dish type in the filter changed.");
+		model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
+		model.notifyObservers("filterDishList");
 	});
 
 	view.search.click(function(){

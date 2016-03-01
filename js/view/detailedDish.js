@@ -103,16 +103,27 @@ var DetailedDish = function(container, id) {
 	$(total_price).append(total_price_unit);
 	this.dish_ingredient_table_tbody.append(total_price);
 
+
+
+	// var temporary_price = model.getDishPriceFromMenu(dish_id);
+	// var temporary_price_string = temporary_price.toString();
+	// var decimalIndex=temporary_price_string.indexOf('.');
+	// if((decimalIndex == '-1') || (temporary_price_string.substring(decimalIndex+1,temporary_price_string.length).length < 5)){
+	// 	this.pending_price.html(temporary_price);
+	// }else{
+	// 	this.pending_price.html(temporary_price.toFixed(2));
+	// }
+
 	// setting the pending bar at the detailed dish information page
-	this.pending_price.html(model.getDishPrice(dish_id));
+	this.pending_price.html(model.getDishPriceFromMenu(dish_id));
 	this.pending_row.addClass("info");
 
 	// set the temporary total price shown in the left menu bar
-	this.temporary_total_price = model.getDishPrice(dish_id) + model.getTotalMenuPrice();
+	this.temporary_total_price = model.getDishPriceFromMenu(dish_id) + model.getTotalMenuPrice();
 	for(var key in model.menu){
 		if(model.getDish(model.menu[key]).type == model.getDish(id).type){
 			// this.removeDishFromMenu(this.menu[key]);
-			this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+			this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPriceFromMenu(model.menu[key]) + model.getDishPriceFromMenu(id);
 			break;
 		}
 	}
@@ -133,7 +144,6 @@ var DetailedDish = function(container, id) {
 	this.update = function(argv){
 		switch (argv) {
 			case "changeNumberofGuests":
-				console.log("dish id is: " + dish_id);
 				for(var key=0; key<$(".instance_amount").length; key++){
 					// $(".instance_amount")[key].html(instance_amount)*model.numberOfGuests;
 					var ingredientsAmount = model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests;
@@ -150,14 +160,14 @@ var DetailedDish = function(container, id) {
 				$(".instance_total_price")[0].innerHTML = model.getDishPrice(dish_id);
 				var current_pending_price = $("#pending-menu-price").html();
 				if (current_pending_price!=0){
-					$("#pending-menu-price").html(model.getDishPrice(dish_id));
+					$("#pending-menu-price").html(model.getDishPriceFromMenu(dish_id));
 					// var current_total_price;
 					console.log("change current price.");
-					this.current_total_price = model.getTotalMenuPrice() + model.getDishPrice(dish_id);
+					this.current_total_price = model.getTotalMenuPrice() + model.getDishPriceFromMenu(dish_id);
 					for(var key=0; key<$(".r_button").length; key++){
 						if (model.getDish(model.menu[key]).type == model.getDish(id).type){
 							$($(".r_button")[key]).parent().parent().addClass("warning");
-							this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+							this.current_total_price = model.getTotalMenuPrice() - model.getDishPriceFromMenu(model.menu[key]) + model.getDishPriceFromMenu(id);
 						}
 					}
 
