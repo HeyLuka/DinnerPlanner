@@ -1,12 +1,10 @@
 //DinnerModel Object constructor
 var DinnerModel = function() {
-
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner this.menu
 	this.observer = [];
 
 	this.menu = [];
-	this.pending_menu = [];
 
   	//this.numberOfGuests = 6;
 	this.numberOfGuests = 1;
@@ -45,7 +43,7 @@ var DinnerModel = function() {
 		//TODO Lab 2
     var selectDishMenu = [];
     for(var key in this.menu){
-      if(this.dishes[this.menu[key]].type == type){
+      if(this.dishes[this.menu[key]].Category == type){
         selectDishMenu.push(this.getDish(this.menu[key]));
       }
     }
@@ -81,6 +79,50 @@ var DinnerModel = function() {
 		}
 		return dishPrice*this.numberOfGuests;
 	}
+	var th = this;
+	/*this.recipe = null;
+	this.getRecipe = function(id){
+		var apiKey = "1hg3g4Dkwr6pSt22n00EfS01rz568IR6";
+		var recipeID = id;
+		var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key="+apiKey;
+		$.ajax({
+			type: "GET",
+			dataType: 'json',
+			cache: false,
+			url: url,
+			success: function (response) {
+				th.recipe = response;
+				//recipe = 2;
+			//console.log(data);
+			}
+		});
+	}*/
+
+	/*this.getDishPrice = function(id){
+		var dishPrice = 0;
+		//this.getRecipe(id);
+		var apiKey = "1hg3g4Dkwr6pSt22n00EfS01rz568IR6";
+		var recipeID = id;
+		var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key="+apiKey;
+		$.ajax({
+			type: "GET",
+			dataType: 'json',
+			cache: false,
+			url: url,
+			success: function (response) {
+				//var recipe = response;
+				for(var key in response.Ingredients){
+					dishPrice += response.Ingredients[key].Quantity;
+
+				}
+				alert(dishPrice);
+				//recipe = 2;
+			//console.log(data);
+			}
+		});
+
+		return dishPrice*this.numberOfGuests;
+	}*/
 
 	// Returns the price of this certain dish in the menu
 	this.getDishPriceFromMenu = function(id){
@@ -119,13 +161,13 @@ var DinnerModel = function() {
 
 	// get the total price including the pending dish(after replacing the one with the same type)
 	// including a argument which represents the pending dish id
-	this.getTempMenuPrice = function(id){
+	/*this.getTempMenuPrice = function(id){
 		var tempMenuPrice = 0;
 		for(var temp_key in this.pending_menu){
 			tempMenuPrice += this.getDishPrice(this.pending_menu[temp_key]);
 		}
 		return tempMenuPrice;
-	}
+	}*/
 
 	//Adds the passed dish to the this.menu. If the dish of that type already exists on the this.menu
 	//it is removed from the this.menu and the new one added.
@@ -138,32 +180,33 @@ var DinnerModel = function() {
     }
 
 		for(var key in this.menu){
-			if(this.getDish(this.menu[key]).type == this.getDish(id).type){
+			if(this.getDish(this.menu[key]).Category == this.getDish(id).Category){
 				this.removeDishFromMenu(this.menu[key]);
 				break;
 			}
 		}
 
 		for(var key in this.dishes){
-      if(this.dishes[key].id == id){
+      if(this.dishes[key].RecipeID == id){
         this.menu.push(id);
       }
     }
 	}
 
 	// virtually adds pending dish to pending menu
-	this.addDishToPendingMenu = function(id){
-		this.pending_menu = this.menu;	
+	/*this.addDishToPendingMenu = function(id){
+		this.pending_menu = this.menu;
 		for(var key in this.pending_menu){
 			if(this.getDish(this.menu[key]).type == this.getDish(id).type){
 				this.removeDishFromMenu(this.menu[key]);
 				break;
 			}
 		}
-	}
+	}*/
 
 	//Removes dish from this.menu
 	this.removeDishFromMenu = function(id) {
+
 		//TODO Lab 2
 	  for(var key in this.menu){
       if(this.menu[key] == id){
@@ -200,7 +243,7 @@ var DinnerModel = function() {
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
-	  for(key in this.dishes){
+	  for(var key in this.dishes){
 			if(this.dishes[key].id == id) {
 				return this.dishes[key];
 			}
@@ -225,7 +268,34 @@ var DinnerModel = function() {
 	// defining the unit i.e. "g", "slices", "ml". Unit
 	// can sometimes be empty like in the example of eggs where
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
-	this.dishes = [{
+	this.dishes = [];
+	this.data = {api_key: "1hg3g4Dkwr6pSt22n00EfS01rz568IR6", pg: 1, rpp: 10};
+	$.get("http://api.bigoven.com/recipes", this.data, function(response){
+		th.dishes = response.Results;
+		for(var key in th.dishes){
+			(function(key){
+				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: "1hg3g4Dkwr6pSt22n00EfS01rz568IR6"}, function(response){
+					th.dishes[key].ingredients = response.Ingredients;
+					//alert(key)
+					th.dishes[key].description = response.Description;
+					th.dishes[key].preparation = response.Instructions;
+					th.dishes[key].id = th.dishes[key].RecipeID;
+					th.dishes[key].name = th.dishes[key].Title;
+					th.dishes[key].type = th.dishes[key].Category;
+					th.dishes[key].image = th.dishes[key].ImageURL120;
+				}, "json");
+			})(key);
+
+		}
+	}, "json");
+
+
+		//delete this.dishes[key].RecipeID;
+		//delete this.dishes[key].Title;
+		//delete this.dishes[key].Category;
+		//delete this.dishes[key].ImageURL;
+
+	/*this.dishes = [{
 		'id':1,
 		'name':'French toast',
 		'preparation': 'one word',
@@ -467,7 +537,7 @@ var DinnerModel = function() {
 			'price':6
 			}]
 		}
-	];
+	];*/
 
 	this.menu_dishes = [{
 		'id':1,

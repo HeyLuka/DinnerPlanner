@@ -49,7 +49,7 @@ var DetailedDish = function(container, id) {
 	var dish_id = id;
 	$(dish_desc_title).text(model.getDish(dish_id).name);
 	var dish_desc_image = document.createElement('img');
-	$(dish_desc_image).attr({"src": "./images/"+model.getDish(dish_id).image});
+	$(dish_desc_image).attr({"src": model.getDish(dish_id).image});
 	var dish_desc_words = document.createElement('p');
 	$(dish_desc_words).text(model.getDish(dish_id).description);
 
