@@ -12,13 +12,14 @@ $(function() {
 */
 
 var model;
+//var dishes;
 
 var detailedDish;
 
 
 $(document).ready(function() {
 	model = new DinnerModel();
-
+	//model.dishesNew = dishes;
 	// exampleView = new ExampleView($("#exampleView"));
 
 
