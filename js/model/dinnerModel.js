@@ -5,6 +5,7 @@ var DinnerModel = function() {
 	this.observer = [];
 
 	this.menu = [];
+	this.menu_dishes = [];
 
   	//this.numberOfGuests = 6;
 	this.numberOfGuests = 1;
@@ -75,10 +76,13 @@ var DinnerModel = function() {
 		var dishPrice = 0;
 		var ingredients = this.getDish(id).ingredients;
 		for(var key in ingredients){
-			dishPrice += ingredients[key].price;
+			dishPrice += ingredients[key].Quantity;
 		}
-		return dishPrice*this.numberOfGuests;
+		dishPrice = dishPrice*this.numberOfGuests;
+		return fixNumber(dishPrice);
+
 	}
+
 	var th = this;
 	/*this.recipe = null;
 	this.getRecipe = function(id){
@@ -129,34 +133,20 @@ var DinnerModel = function() {
 		var dPrice = 0;
 		var ingredients_list = this.getDishFromMenu(id).ingredients;
 		for(var key in ingredients_list){
-			dPrice += ingredients_list[key].quantity;
+			dPrice += ingredients_list[key].Quantity;
 		}
 		dPrice = dPrice*this.numberOfGuests;
-		var dPriceString = dPrice.toString();
-		var decimalIndex=dPriceString.indexOf('.');
-		if((decimalIndex == '-1') || (dPriceString.substring(decimalIndex+1,dPriceString.length).length < 5)){
-			return dPrice;
-		}else{
-			return dPrice.toFixed(2);
-		}
 
-		// return dPrice*this.numberOfGuests;
+		return fixNumber(dPrice);
 	};
 
 	this.getTotalMenuPrice = function() {
-		//TODO Lab 2
 		var totalMenuPrice = 0;
 		for(var key in this.menu){
 			totalMenuPrice += this.getDishPriceFromMenu(this.menu[key]);
 		}
-		var totalMenuPriceString = totalMenuPrice.toString();
-		var decimalIndex=totalMenuPriceString.indexOf('.');
-		if((decimalIndex == '-1') || (totalMenuPriceString.substring(decimalIndex+1,totalMenuPriceString.length).length < 5)){
-			return totalMenuPrice;
-		}else{
-			return totalMenuPrice.toFixed(2);
-		}
-    // return totalMenuPrice;
+
+    return fixNumber(totalMenuPrice);
 	}
 
 	// get the total price including the pending dish(after replacing the one with the same type)
@@ -180,15 +170,17 @@ var DinnerModel = function() {
     }
 
 		for(var key in this.menu){
-			if(this.getDish(this.menu[key]).Category == this.getDish(id).Category){
+			if(this.getDish(this.menu[key]).type == this.getDish(id).type){
 				this.removeDishFromMenu(this.menu[key]);
+				this.removeDishFromMenuDishes(this.menu[key]);
 				break;
 			}
 		}
 
 		for(var key in this.dishes){
-      if(this.dishes[key].RecipeID == id){
+      if(this.dishes[key].id == id){
         this.menu.push(id);
+				this.menu_dishes.push(this.getDish(id));
       }
     }
 	}
@@ -207,7 +199,6 @@ var DinnerModel = function() {
 	//Removes dish from this.menu
 	this.removeDishFromMenu = function(id) {
 
-		//TODO Lab 2
 	  for(var key in this.menu){
       if(this.menu[key] == id){
         this.menu.splice(key,1);
@@ -215,6 +206,15 @@ var DinnerModel = function() {
         break;
       }
     }
+	}
+
+	this.removeDishFromMenuDishes = function(id){
+		for(var key in this.menu_dishes){
+			if(this.menu_dishes[key].id == id){
+				this.menu.splice(key,1);
+				break;
+			}
+		}
 	}
 
 	//function that returns all this.dishes of specific type (i.e. "starter", "main dish" or "dessert")
@@ -269,12 +269,12 @@ var DinnerModel = function() {
 	// can sometimes be empty like in the example of eggs where
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	this.dishes = [];
-	this.data = {api_key: "1hg3g4Dkwr6pSt22n00EfS01rz568IR6", pg: 1, rpp: 10};
+	this.data = {api_key: "18f3cT02U9f6yRl3OKDpP8NA537kxYKu", pg: 1, rpp: 12};
 	$.get("http://api.bigoven.com/recipes", this.data, function(response){
 		th.dishes = response.Results;
 		for(var key in th.dishes){
 			(function(key){
-				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: "1hg3g4Dkwr6pSt22n00EfS01rz568IR6"}, function(response){
+				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: "18f3cT02U9f6yRl3OKDpP8NA537kxYKu"}, function(response){
 					th.dishes[key].ingredients = response.Ingredients;
 					//alert(key)
 					th.dishes[key].description = response.Description;
@@ -539,7 +539,7 @@ var DinnerModel = function() {
 		}
 	];*/
 
-	this.menu_dishes = [{
+	/*this.menu_dishes = [{
 		'id':1,
 		'name':'French toast',
 		'preparation': 'one word',
@@ -781,5 +781,5 @@ var DinnerModel = function() {
 			'price':6
 			}]
 		}
-	];
+	];*/
 }

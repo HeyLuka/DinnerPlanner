@@ -16,6 +16,16 @@ var model;
 
 var detailedDish;
 
+var fixNumber = function(number){
+	var numberString = number.toString();
+	var decimalIndex=numberString.indexOf('.');
+	if((decimalIndex == '-1') || (numberString.substring(decimalIndex+1,numberString.length).length < 5)){
+		return number;
+	}else{
+		return parseFloat(number.toFixed(2));
+	}
+}
+
 
 $(document).ready(function() {
 	model = new DinnerModel();
