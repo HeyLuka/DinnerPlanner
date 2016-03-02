@@ -269,12 +269,12 @@ var DinnerModel = function() {
 	// can sometimes be empty like in the example of eggs where
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	this.dishes = [];
-	this.data = {api_key: "18f3cT02U9f6yRl3OKDpP8NA537kxYKu", pg: 1, rpp: 12};
+	this.data = {api_key: "H9n1zb6es492fj87OxDtZM9s5sb29rW3", pg: 1, rpp: 12};
 	$.get("http://api.bigoven.com/recipes", this.data, function(response){
 		th.dishes = response.Results;
 		for(var key in th.dishes){
 			(function(key){
-				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: "18f3cT02U9f6yRl3OKDpP8NA537kxYKu"}, function(response){
+				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: "H9n1zb6es492fj87OxDtZM9s5sb29rW3"}, function(response){
 					th.dishes[key].ingredients = response.Ingredients;
 					//alert(key)
 					th.dishes[key].description = response.Description;
