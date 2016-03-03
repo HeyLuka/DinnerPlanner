@@ -190,14 +190,11 @@ var MyDinnerBar = function(container) {
 
 
 				}
-				break;
 				// Set total price of my Menu
-				// this.myMenu_totalprice.text(model.getTotalMenuPrice());
-				
-
-
+				this.myMenu_totalprice.text(model.getTotalMenuPrice());
+				break;
 				// 		// for(var key in model.menu){
-				// 		// 	if(model.getDish(model.menu[key]).type == model.getDish(id).type){
+				// 		// 	if(model.get(model.menu[key]).type == model.getDish(id).type){
 				// 		// 		// this.removeDishFromMenu(this.menu[key]);
 				// 		// 		this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
 				// 		// 		// this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
