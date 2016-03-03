@@ -28,14 +28,14 @@ var ConfirmDinner = function(container) {
 		$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
 		$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
 		var dish_instance_img = document.createElement('img');
-		$(dish_instance_img).attr({"src": "images/"+model.getDish(model.menu[key])["image"]});
+		$(dish_instance_img).attr({"src": model.getDishFromMenu(model.menu[key])["image"]});
 		$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
 		var dish_instance_name = document.createElement('h3');
-		$(dish_instance_name).text(model.getDish(model.menu[key])["name"]);
+		$(dish_instance_name).text(model.getDishFromMenu(model.menu[key])["name"]);
 		var dish_instance_desc = document.createElement('p');
 		$(dish_instance_desc).attr("style", "text-align: left");
 		// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
-		var temp_string = model.getDish(model.menu[key])["description"];
+		var temp_string = model.getDishFromMenu(model.menu[key])["description"];
 		if(temp_string.length > 120){
 			temp_string = temp_string.substring(0,120)+"...";
 		}

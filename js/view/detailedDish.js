@@ -153,36 +153,36 @@ var DetailedDish = function(container, id) {
 					$(".instance_amount")[key].innerHTML = fixNumber(ingredientsAmount) + " " + model.getDish(dish_id).ingredients[key].Unit;
 					//$(".instance_amount")[key].innerHTML = (model.getDish(dish_id).ingredients[key].quantity*model.numberOfGuests).toFixed(2) + " " + model.getDish(dish_id).ingredients[key].unit;
 					$(".instance_price")[key].innerHTML = fixNumber(ingredientsAmount);
-				}
-				$(".instance_total_price")[0].innerHTML = model.getDishPrice(dish_id);
-				var current_pending_price = $("#pending-menu-price").html();
-				if (current_pending_price!=0){
-					$("#pending-menu-price").html(model.getDishPrice(dish_id));
-					// var current_total_price;
-					console.log("change current price.");
-					this.current_total_price = model.getTotalMenuPrice() + model.getDishPrice(dish_id);
-					for(var key=0; key<$(".r_button").length; key++){
-						if (model.getDishFromMenu(model.menu[key]).type == model.getDish(dish_id).type){
-							$($(".r_button")[key]).parent().parent().addClass("warning");
-							this.current_total_price = model.getTotalMenuPrice() - model.getDishPriceFromMenu(model.menu[key]) + model.getDishPrice(dish_id);
-						}
 					}
+					$(".instance_total_price")[0].innerHTML = model.getDishPrice(dish_id);
+					var current_pending_price = $("#pending-menu-price").html();
+					if (current_pending_price!=0){
+						$("#pending-menu-price").html(model.getDishPrice(dish_id));
+						// var current_total_price;
+						console.log("change current price.");
+						this.current_total_price = model.getTotalMenuPrice() + model.getDishPrice(dish_id);
+						for(var key=0; key<$(".r_button").length; key++){
+							if (model.getDishFromMenu(model.menu[key]).type == model.getDish(dish_id).type){
+								$($(".r_button")[key]).parent().parent().addClass("warning");
+								this.current_total_price = model.getTotalMenuPrice() - model.getDishPriceFromMenu(model.menu[key]) + model.getDishPrice(dish_id);
+							}
+						}
 
 
-					// for(var key in model.menu){
-					// 	if(model.getDish(model.menu[key]).type == model.getDish(id).type){
-					// 		// this.removeDishFromMenu(this.menu[key]);
-					// 		this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
-					// 		// this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
-					// 	break;
-					// 	}
-					// }
-					this.detailed_price.html(fixNumber(this.current_total_price));
+						// for(var key in model.menu){
+						// 	if(model.getDish(model.menu[key]).type == model.getDish(id).type){
+						// 		// this.removeDishFromMenu(this.menu[key]);
+						// 		this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+						// 		// this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+						// 	break;
+						// 	}
+						// }
+						this.detailed_price.html(fixNumber(this.current_total_price));
 					// $("#detailed-price").html(model.getDishPrice(dish_id) + model.getTotalMenuPrice());
-				}
-				else{
-					$("#detailed-price").html(fixNumber(model.getTotalMenuPrice()));
-				}
+					}
+					else{
+						$("#detailed-price").html(fixNumber(model.getTotalMenuPrice()));
+					}
 			}
 			$("#people-num").html(model.getNumberOfGuests());
 

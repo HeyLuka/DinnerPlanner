@@ -170,19 +170,15 @@ var DinnerModel = function() {
     }
 
 		for(var key in this.menu){
-			if(this.getDish(this.menu[key]).type == this.getDish(id).type){
+			if(this.getDishFromMenu(this.menu[key]).type == this.getDish(id).type){
 				this.removeDishFromMenu(this.menu[key]);
 				this.removeDishFromMenuDishes(this.menu[key]);
 				break;
 			}
 		}
 
-		for(var key in this.dishes){
-      if(this.dishes[key].id == id){
-        this.menu.push(id);
-				this.menu_dishes.push(this.getDish(id));
-      }
-    }
+    this.menu.push(id);
+		this.menu_dishes.push(this.getDish(id));
 	}
 
 	// virtually adds pending dish to pending menu
@@ -220,8 +216,88 @@ var DinnerModel = function() {
 	//function that returns all this.dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the this.dishes will be returned
+	this.apiKey = "H9n1zb6es492fj87OxDtZM9s5sb29rW3";
+	th.count = 0;
 	this.getAllDishes = function (type, filter) {
-	  return $(this.dishes).filter(function(index,dish) {
+    var any_kw = filter;
+		var include_primarycat = type;
+		if(any_kw){
+			th.data.any_kw = any_kw;
+		}
+		if(include_primarycat){
+			th.data.include_primarycat = include_primarycat;
+		}
+
+		$.get("http://api.bigoven.com/recipes", th.data, function (response) {
+			//th.dishes = response.Results;
+			th.dishes = response.Results;
+			th.notifyObservers("filterDishList");
+			/*for(var key in th.dishes){
+				(function(key){
+					var url = "http://api.bigoven.com/recipe/" + th.dishes[key].RecipeID
+                  + "?api_key="+th.apiKey;
+	        $.ajax({
+	            type: "GET",
+	            dataType: 'json',
+	            cache: false,
+	            url: url,
+	            success: function (response) {
+								th.dishes[key].ingredients = response.Ingredients;
+								th.dishes[key].description = response.Description;
+								th.dishes[key].preparation = response.Instructions;
+								th.dishes[key].id = th.dishes[key].RecipeID;
+								th.dishes[key].name = th.dishes[key].Title;
+								th.dishes[key].type = th.dishes[key].Category;
+								th.dishes[key].image = th.dishes[key].ImageURL120;
+	                //console.log(data);
+								th.count++;
+								//alert(th.count);
+								if(th.count == th.dishes.length){
+									th.notifyObservers("filterDishList");
+									alert("notify")
+								}
+	            }
+	        });
+				})(key);
+			}*/
+
+				//console.log(data);
+		}, "json");
+    /*$.ajax({
+        type: "GET",
+				// ContentType: "application/json",
+				dataType: 'json',
+        // Content-Type: 'application/json',
+        cache: false,
+        url: url,
+        success: function (data) {
+					//th.dishes = response.Results;
+					th.dishes = data;
+					var count = 0;
+					for(var key in th.dishes){
+						(function(key){
+							$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: th.apiKey}, function(response){
+								th.dishes[key].ingredients = response.Ingredients;
+								th.dishes[key].description = response.Description;
+								th.dishes[key].preparation = response.Instructions;
+								th.dishes[key].id = th.dishes[key].RecipeID;
+								th.dishes[key].name = th.dishes[key].Title;
+								th.dishes[key].type = th.dishes[key].Category;
+								th.dishes[key].image = th.dishes[key].ImageURL120;
+								count++;
+								if(count == th.dishes.length-1){
+									th.notifyObservers("filterDishList");
+								}
+
+							}, "json");
+						})(key);
+
+					}
+            //console.log(data);
+        }
+    });*/
+
+	  /*return $(this.dishes).filter(function(index,dish) {
 		var found = true;
 		// if any valid filter parameter is passed, the following operation would be processed.
 		if(filter){
@@ -238,7 +314,7 @@ var DinnerModel = function() {
 			}
 		}
 	  	return (type == "all" || dish.type == type) && found;
-	  });
+	  });*/
 	}
 
 	//function that returns a dish of specific ID
@@ -269,12 +345,13 @@ var DinnerModel = function() {
 	// can sometimes be empty like in the example of eggs where
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	this.dishes = [];
-	this.data = {api_key: "18f3cT02U9f6yRl3OKDpP8NA537kxYKu", pg: 1, rpp: 12};
+
+	this.data = {api_key: this.apiKey, pg: 1, rpp: 12};
 	$.get("http://api.bigoven.com/recipes", this.data, function(response){
 		th.dishes = response.Results;
 		for(var key in th.dishes){
 			(function(key){
-				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: "18f3cT02U9f6yRl3OKDpP8NA537kxYKu"}, function(response){
+				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: th.apiKey}, function(response){
 					th.dishes[key].ingredients = response.Ingredients;
 					//alert(key)
 					th.dishes[key].description = response.Description;

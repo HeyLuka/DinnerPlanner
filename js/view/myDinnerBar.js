@@ -181,35 +181,58 @@ var MyDinnerBar = function(container) {
 
 			case "filterDishList":
 				console.log("filter dish list");
-				var filteredDish = model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
+				var type = $("#dish-type").val();
+				var filter = $("#dish-keyword").val();
+				//var filteredDish = model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
 				this.dishesList.empty();
-				for(var key in filteredDish) {
-					var dish_instance = document.createElement('div');
-					$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
-					$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
-					var dish_instance_img = document.createElement('img');
-					$(dish_instance_img).attr({"src": "images/"+model.getDish(model.dishes[key].id)["image"]});
-					$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
-					$(dish_instance_img).attr("key", model.dishes[key].id);
-					$(dish_instance_img).click(showDetail);
-					//$(dish_instance_img).attr("onclick", '(function(){var id = this.attr("key");var detailedDish = new DetailedDish($("#displayField"), id);})()');
-					//$(dish_instance_img).click((function(){var detailedDish = new DetailedDish($("#displayField"), 2))());
-					var dish_instance_name = document.createElement('h3');
-					$(dish_instance_name).text(model.getDish(model.dishes[key].id)["name"]);
-					var dish_instance_desc = document.createElement('p');
-					$(dish_instance_desc).attr("style", "text-align: left");
-					// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
-					var temp_string = model.getDish(model.dishes[key].id)["description"];
-					if(temp_string.length > 120){
-						temp_string = temp_string.substring(0,120)+"...";
-					}
-					$(dish_instance_desc).text(temp_string);
+				for(var key in model.dishes) {
+					(function(key, type, filter){
+						var url = "http://api.bigoven.com/recipe/" + model.dishes[key].RecipeID
+	                  + "?api_key="+model.apiKey;
+		        $.ajax({
+		            type: "GET",
+		            dataType: 'json',
+		            cache: false,
+		            url: url,
+		            success: function (response) {
+									model.dishes[key].ingredients = response.Ingredients;
+									model.dishes[key].description = response.Description;
+									model.dishes[key].preparation = response.Instructions;
+									model.dishes[key].id = model.dishes[key].RecipeID;
+									model.dishes[key].name = model.dishes[key].Title;
+									model.dishes[key].type = model.dishes[key].Category;
+									model.dishes[key].image = model.dishes[key].ImageURL120;
+									var dish_instance = document.createElement('div');
+									$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
+									$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
+									var dish_instance_img = document.createElement('img');
+									$(dish_instance_img).attr({"src": model.dishes[key].image});
+									$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
+									$(dish_instance_img).attr("key", model.dishes[key].id);
+									$(dish_instance_img).click(showDetail);
+									//$(dish_instance_img).attr("onclick", '(function(){var id = this.attr("key");var detailedDish = new DetailedDish($("#displayField"), id);})()');
+									//$(dish_instance_img).click((function(){var detailedDish = new DetailedDish($("#displayField"), 2))());
+									var dish_instance_name = document.createElement('h3');
+									$(dish_instance_name).text(model.dishes[key].name);
+									var dish_instance_desc = document.createElement('p');
+									$(dish_instance_desc).attr("style", "text-align: left");
+									// $(dish_instance_desc).text(model.getDish(model.dishes[key].id)["description"]);
+									var temp_string = model.dishes[key].description;
+									if(temp_string.length > 120){
+										temp_string = temp_string.substring(0,120)+"...";
+									}
+									$(dish_instance_desc).text(temp_string);
+									if((type == $("#dish-type").val()) && (filter == $("#dish-keyword").val())){
+										$(dish_instance).append(dish_instance_img);
+										$(dish_instance).append(dish_instance_name);
+										$(dish_instance).append(dish_instance_desc);
+										$("#dishesList").append(dish_instance);
 
-					this.dishesList.append(dish_instance);
-					$(dish_instance).append(dish_instance_img);
-					$(dish_instance).append(dish_instance_name);
-					$(dish_instance).append(dish_instance_desc);
+									}
 
+		            }
+		        });
+					}(key, type, filter))
 			}
 				break;
 
@@ -243,13 +266,13 @@ var MyDinnerBarController = function(view, model){
 	view.dish_keyword.on("input", function(){
 		// console.log("dish title in the filter changed.");
 		model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
-		model.notifyObservers("filterDishList");
+		//model.notifyObservers("filterDishList");
 	});
 
 	view.dish_type.change(function(){
 		// console.log("dish type in the filter changed.");
 		model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
-		model.notifyObservers("filterDishList");
+		//model.notifyObservers("filterDishList");
 	});
 
 	view.search.click(function(){
@@ -265,7 +288,7 @@ var MyDinnerBarController = function(view, model){
 			$(dish_instance).attr({"class": "col-xs-4", "id": "dish-example"});
 			$(dish_instance).attr({"style": "height: 250px; display: block; margin-top: 20px; text-align: center"});
 			var dish_instance_img = document.createElement('img');
-			$(dish_instance_img).attr({"src": "images/"+dishesFiltered[key_new]["image"]});
+			$(dish_instance_img).attr({"src": dishesFiltered[key_new]["image"]});
 			$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
 			$(dish_instance_img).attr("key", dishesFiltered[key_new].id);
 			/*$(dish_instance_img).click(function(){

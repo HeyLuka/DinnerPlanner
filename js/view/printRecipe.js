@@ -27,7 +27,7 @@ var PrintRecipe = function(container) {
 		var dish_instance_img_div = document.createElement('div');
 		$(dish_instance_img_div).attr({"class": "col-xs-2"});
 		var dish_instance_img = document.createElement('img');
-		$(dish_instance_img).attr({"src": "images/"+model.getDish(model.menu[key])["image"]});
+		$(dish_instance_img).attr({"src": model.getDishFromMenu(model.menu[key])["image"]});
 		$(dish_instance_img).attr({"class": "img-circle", "alt": "Dish-instance", "width": "100", "height": "100"});
 		$(dish_instance_img_div).append(dish_instance_img);
 		var dish_instance_desc_div = document.createElement('div');
@@ -35,7 +35,7 @@ var PrintRecipe = function(container) {
 		var dish_instance_desc_h4 = document.createElement('h4');
 		$(dish_instance_desc_h4).text("LASAGNE");
 		var dish_instance_desc_p = document.createElement('p');
-		var temp_string = model.getDish(model.menu[key])["description"];
+		var temp_string = model.getDishFromMenu(model.menu[key])["description"];
 		if(temp_string.length > 120){
 			temp_string = temp_string.substring(0,60)+"...";
 		}
@@ -47,7 +47,7 @@ var PrintRecipe = function(container) {
 		var dish_instance_preparation_h4 = document.createElement('h4');
 		$(dish_instance_preparation_h4).text("PREPARATION");
 		var dish_instance_preparation_p = document.createElement('p');
-		$(dish_instance_preparation_p).text(model.getDish(1).preparation);
+		$(dish_instance_preparation_p).text(model.getDishFromMenu(model.menu[key]).preparation);
 		$(dish_instance_preparation_div).append(dish_instance_preparation_h4);
 		$(dish_instance_preparation_div).append(dish_instance_preparation_p);
 
