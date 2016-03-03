@@ -15,7 +15,6 @@ var model;
 //var dishes;
 
 var detailedDish;
-
 var fixNumber = function(number){
 	var numberString = number.toString();
 	var decimalIndex=numberString.indexOf('.');
