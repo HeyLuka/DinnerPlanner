@@ -216,10 +216,10 @@ var DinnerModel = function() {
 	//function that returns all this.dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the this.dishes will be returned
-	this.apiKey = "H9n1zb6es492fj87OxDtZM9s5sb29rW3";
+	this.apiKey = "18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
 	th.count = 0;
 	this.getAllDishes = function (type, filter) {
-    var any_kw = filter;
+	    var any_kw = filter;
 		var include_primarycat = type;
 		if(any_kw){
 			th.data.any_kw = any_kw;
@@ -349,6 +349,7 @@ var DinnerModel = function() {
 	this.data = {api_key: this.apiKey, pg: 1, rpp: 12};
 	$.get("http://api.bigoven.com/recipes", this.data, function(response){
 		th.dishes = response.Results;
+		// th.notifyObservers("gotDishesInfo");
 		for(var key in th.dishes){
 			(function(key){
 				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: th.apiKey}, function(response){

@@ -7,6 +7,7 @@ var MyDinnerBar = function(container) {
 	this.selectDish_panel = container.find("#selectDish-panel");
 	this.selectDish_panel.show();
 	this.myMenu_totalprice = container.find("#detailed-price");
+	this.notice_info = container.find("#notice-info");
 
 	// Define the layout of myDinner Bar
 
@@ -107,6 +108,7 @@ var MyDinnerBar = function(container) {
 
 	}
 
+	this.notice_info.hide();
 
 
 	model.addObserver(this);
@@ -144,6 +146,19 @@ var MyDinnerBar = function(container) {
 
 
 				}
+				var current_pending_price = $("#pending-menu-price").html();
+					if (current_pending_price==0){
+						// var current_total_price;
+						console.log("change current total price.");
+						// this.current_total_price = model.gettotalmenuprice() + model.getdishprice(dish_id);
+						this.myMenu_totalprice.html(model.getTotalMenuPrice());
+						// for(var key=0; key<$(".r_button").length; key++){
+						// 	if (model.getdishfrommenu(model.menu[key]).type == model.getdish(dish_id).type){
+						// 		$($(".r_button")[key]).parent().parent().addclass("warning");
+						// 		this.current_total_price = model.gettotalmenuprice() - model.getdishpricefrommenu(model.menu[key]) + model.getdishprice(dish_id);
+						// 	}
+						// }
+					}
 				// Set total price of my Menu
 				// this.myMenu_totalprice.text(model.getTotalMenuPrice());
 				break;
@@ -175,11 +190,28 @@ var MyDinnerBar = function(container) {
 
 
 				}
-				// Set total price of my Menu
-				this.myMenu_totalprice.text(model.getTotalMenuPrice());
 				break;
+				// Set total price of my Menu
+				// this.myMenu_totalprice.text(model.getTotalMenuPrice());
+				
+
+
+				// 		// for(var key in model.menu){
+				// 		// 	if(model.getDish(model.menu[key]).type == model.getDish(id).type){
+				// 		// 		// this.removeDishFromMenu(this.menu[key]);
+				// 		// 		this.current_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+				// 		// 		// this.temporary_total_price = model.getTotalMenuPrice() - model.getDishPrice(model.menu[key]) + model.getDishPrice(id);
+				// 		// 	break;
+				// 		// 	}
+				// 		// }
+				// 		// this.detailed_price.html(fixNumber(this.current_total_price));
+				// 		this.myMenu_totalprice.html(fixNumber(this.current_total_price));
+
+				// // this.myMenu_totalprice.text(model.getTotalMenuPrice());
+				// break;
 
 			case "filterDishList":
+				$("#notice-info").hide();
 				console.log("filter dish list");
 				var type = $("#dish-type").val();
 				var filter = $("#dish-keyword").val();
@@ -234,7 +266,10 @@ var MyDinnerBar = function(container) {
 		        });
 					}(key, type, filter))
 			}
-				break;
+			break;
+		case "gotDishesInfo":
+			$("#notice-info").hide();
+			break;
 
 			default:
 
@@ -265,12 +300,14 @@ var MyDinnerBarController = function(view, model){
 
 	view.dish_keyword.on("input", function(){
 		// console.log("dish title in the filter changed.");
+		$("#notice-info").show();
 		model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
 		//model.notifyObservers("filterDishList");
 	});
 
 	view.dish_type.change(function(){
 		// console.log("dish type in the filter changed.");
+		$("#notice-info").show();
 		model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
 		//model.notifyObservers("filterDishList");
 	});
