@@ -112,6 +112,7 @@ var MyDinnerBar = function(container) {
 	model.addObserver(this);
 
 	this.update = function(argv){
+		//alert(arguments[1])
 		switch (argv) {
 			case "changeNumberofGuests":
 				this.numberOfGuests.text(model.numberOfGuests);
@@ -180,13 +181,20 @@ var MyDinnerBar = function(container) {
 				break;
 
 			case "filterDishList":
-				console.log("filter dish list");
-				var type = $("#dish-type").val();
-				var filter = $("#dish-keyword").val();
+				//console.log("filter dish list");
+				var type = arguments[1];
+				//alert(type)
+				if(arguments.length == 3){
+					var keyWord = arguments[2];
+				}else {
+					var keyWord = "";
+				}
+
+				//alert(filter)
 				//var filteredDish = model.getAllDishes($("#dish-type").val(), $("#dish-keyword").val());
 				this.dishesList.empty();
 				for(var key in model.dishes) {
-					(function(key, type, filter){
+					(function(key, type, keyWord){
 						var url = "http://api.bigoven.com/recipe/" + model.dishes[key].RecipeID
 	                  + "?api_key="+model.apiKey;
 		        $.ajax({
@@ -222,7 +230,8 @@ var MyDinnerBar = function(container) {
 										temp_string = temp_string.substring(0,120)+"...";
 									}
 									$(dish_instance_desc).text(temp_string);
-									if((type == $("#dish-type").val()) && (filter == $("#dish-keyword").val())){
+									//alert(filter)
+									if((type == $("#dish-type").val()) && (keyWord == $("#dish-keyword").val())){
 										$(dish_instance).append(dish_instance_img);
 										$(dish_instance).append(dish_instance_name);
 										$(dish_instance).append(dish_instance_desc);
@@ -232,7 +241,7 @@ var MyDinnerBar = function(container) {
 
 		            }
 		        });
-					}(key, type, filter))
+					}(key, type, keyWord))
 			}
 				break;
 
@@ -251,7 +260,7 @@ var UpdateMenuController = function(id, model){
 var MyDinnerBarController = function(view, model){
 	view.plusGuest.click(function(){
 		model.setNumberOfGuests(model.getNumberOfGuests() + 1);
-		model.notifyObservers("changeNumberofGuests");
+		model.notifyObservers("changeNumberofGuests", "a");
 	});
 	view.minusGuest.click(function(){
 		model.setNumberOfGuests(model.getNumberOfGuests() - 1);

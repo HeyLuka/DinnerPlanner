@@ -21,7 +21,14 @@ var DinnerModel = function() {
 
 	this.notifyObservers = function(argv){
 		for(var key in this.observer){
-			this.observer[key].update(argv);
+			if(arguments.length == 3){
+				this.observer[key].update(argv, arguments[1], arguments[2]);
+			}else if(arguments.length == 2){
+				this.observer[key].update(argv, arguments[1]);
+			}else {
+				this.observer[key].update(argv);
+			}
+
 		}
 	}
 
@@ -216,22 +223,32 @@ var DinnerModel = function() {
 	//function that returns all this.dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the this.dishes will be returned
-	this.apiKey = "H9n1zb6es492fj87OxDtZM9s5sb29rW3";
-	th.count = 0;
-	this.getAllDishes = function (type, filter) {
-    var any_kw = filter;
+	this.apiKey = "3stL5NVP4s6ZkmK5gt4dci8a4zOQRpD4";
+
+	this.getAllDishes = function (type, keyWord) {
+    var any_kw = keyWord;
 		var include_primarycat = type;
+		th.data.any_kw = "";
+		th.data.include_primarycat = "";
 		if(any_kw){
 			th.data.any_kw = any_kw;
+		}else {
+			delete th.data.any_kw;
 		}
 		if(include_primarycat){
 			th.data.include_primarycat = include_primarycat;
+		}else {
+			delete th.data.include_primarycat;
 		}
-
 		$.get("http://api.bigoven.com/recipes", th.data, function (response) {
 			//th.dishes = response.Results;
 			th.dishes = response.Results;
-			th.notifyObservers("filterDishList");
+			if(any_kw){
+				th.notifyObservers("filterDishList", include_primarycat, any_kw);
+			}else {
+				th.notifyObservers("filterDishList", include_primarycat);
+			}
+
 			/*for(var key in th.dishes){
 				(function(key){
 					var url = "http://api.bigoven.com/recipe/" + th.dishes[key].RecipeID
