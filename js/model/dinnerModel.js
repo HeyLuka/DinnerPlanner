@@ -366,6 +366,7 @@ var DinnerModel = function() {
 	this.data = {api_key: this.apiKey, pg: 1, rpp: 12};
 	$.get("http://api.bigoven.com/recipes", this.data, function(response){
 		th.dishes = response.Results;
+		// th.notifyObservers("gotDishesInfo");
 		for(var key in th.dishes){
 			(function(key){
 				$.get("http://api.bigoven.com/recipe/"+th.dishes[key].RecipeID, {api_key: th.apiKey}, function(response){
